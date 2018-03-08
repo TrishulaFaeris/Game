@@ -34,6 +34,7 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import gui.interfaces.Visible;
+import mainGame.screens.GameScreen;
 
 public abstract class ComponentContainer extends JPanel{
 

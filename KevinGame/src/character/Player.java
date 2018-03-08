@@ -9,28 +9,32 @@ import gui.components.AnimatedComponent;
 import gui.components.ImageTextButton;
 import gui.interfaces.KeyedComponent;
 
-public class Player extends AnimatedComponent implements KeyedComponent{
+public class Player extends ImageButton implements KeyedComponent{
 
-	public Player(int x, int y, int w, int h) {
-		super(x, y, w, h);
-		
+	public int movement;
+	public Player(int x, int y, int w, int h, String imageLocation) {
+		super(x, y, w, h, imageLocation);
+		// TODO Auto-generated constructor stub
+		movement = 10;
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			setVx(-3);
-//			setX(getX() - 10);
-//			System.out.println("asdfasd");
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
+			this.move(getX(), getY()-movement, 15);
+			System.out.println("North");
 		}
 	    else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-	    	setVx(3);
+			this.move(getX()+movement, getY(), 30);
+			System.out.println("E");
 	    }
-	    else if (e.getKeyCode() == KeyEvent.VK_UP) {
-	    	setVy(-3);
-		}
 	    else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-	    	setVy(3);
+			this.move(getX(), getY()+movement, 30);
+			System.out.println("S");
+		}
+	    else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			this.move(getX()-movement, getY(), 30);
+			System.out.println("W");
 	    }
 		
 	}
@@ -59,5 +63,5 @@ public class Player extends AnimatedComponent implements KeyedComponent{
 		
 	}
 
-
+	
 }
