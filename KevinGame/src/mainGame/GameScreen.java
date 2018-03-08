@@ -20,7 +20,7 @@ public class GameScreen extends FullFunctionScreen {
 	@Override
 	public void initAllObjects(List<Visible> viewObjects) {
 		p = new Player(300, 300, 100, 100);
-		p.addSequence("resources/", time, x, y, w, h, n);
+		p.addSequence("resources/pro", time, x, y, w, h, n);
 		
 	}
 
