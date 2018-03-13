@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 
 import gui.components.Action;
 import gui.components.AnimatedComponent;
+import gui.components.ImageButton;
 import gui.components.ImageTextButton;
 import gui.interfaces.KeyedComponent;
 

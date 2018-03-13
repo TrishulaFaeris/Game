@@ -1,6 +1,4 @@
-package character;
-
-import gui.components.Graphic;
+package gui.components;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -14,9 +12,6 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 
 import gui.GUIApplication;
-import gui.components.Action;
-import gui.components.Button;
-import gui.components.Graphic;
 import gui.interfaces.Clickable;
 
 public class ImageButton extends Graphic implements Clickable{
