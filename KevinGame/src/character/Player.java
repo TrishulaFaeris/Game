@@ -9,64 +9,61 @@ import java.awt.image.BufferedImage;
 
 import gui.components.Action;
 import gui.components.AnimatedComponent;
+import gui.components.Button;
+import gui.components.Component;
 import gui.components.Graphic;
 import gui.components.ImageButton;
 import gui.components.ImageTextButton;
 import gui.interfaces.KeyedComponent;
 
-public class Player extends ImageButton implements KeyedComponent{
+public class Player extends Component implements KeyedComponent{
 
 
 	public int movement;
 	public String iLocation;
+	private BufferedImage[] orientations;
+	private int currentOrientation;
 	
-	public Player(int x, int y, int w, int h, String imageLocation) {
-		super(x, y, w, h, imageLocation);
-		// TODO Auto-generated constructor stub
+	public Player(int x, int y, int width, int height) {
+		super(x,y,width,height);
 		movement = 10;
-		iLocation = "resources/PPNorth.png";
+		orientations = new BufferedImage[4];
+		orientations[0] = new Graphic(0, 0, "resources/PPNorth.png").getImage();
+		orientations[1] = new Graphic(0, 0, "resources/PPEast.png").getImage();
+		orientations[2] = new Graphic(0, 0, "resources/PPSouth.png").getImage();
+		orientations[3] = new Graphic(0, 0, "resources/PPWest.png").getImage();
 		
 	}
 
 	@Override
-	public void keyPressed(KeyEvent e) {
-		/*
+	public void keyPressed(KeyEvent e) { 
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
+			currentOrientation = 0;
 			this.move(getX(), getY()-movement, 15);
 			System.out.println("North");
 		}
 	    else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			currentOrientation = 1;
 			this.move(getX()+movement, getY(), 30);
 			System.out.println("E");
 	    }
 	    else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			currentOrientation = 2;
 			this.move(getX(), getY()+movement, 30);
-			System.out.println("S");
+	    	System.out.println("S");
 		}
 	    else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			currentOrientation = 3;
 			this.move(getX()-movement, getY(), 30);
-			System.out.println("W");
-	    }
-	   */ 
-		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			
-			System.out.println("North");
-		}
-	    else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-	    	changeLocation("resources/PPEast.png");
-	    	returnLocation();
-	    	update();
-			System.out.println("E");
-	    }
-	    else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			System.out.println("S");
-		}
-	    else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			System.out.println("W");
+	    	System.out.println("W");
 	    }
 		
 	}
-
+	
+	public BufferedImage getImage(){
+		return orientations[currentOrientation];
+	}
+	
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
@@ -90,12 +87,13 @@ public class Player extends ImageButton implements KeyedComponent{
 		// TODO Auto-generated method stub
 		
 	}
-	public void changeLocation(String s) {
-		iLocation = s;
-		update();
-	}
-	public String returnLocation() {
-		return iLocation;
+
+
+
+	@Override
+	public void update(Graphics2D g) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
