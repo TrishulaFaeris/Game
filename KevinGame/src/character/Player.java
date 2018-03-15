@@ -1,8 +1,10 @@
 package character;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -19,8 +21,14 @@ import gui.interfaces.KeyedComponent;
 public class Player extends Component implements KeyedComponent{
 
 
-	public int movement;
-	public String iLocation;
+	private int movement;
+	private String iLocation;
+	private int xPos;
+	private int yPos;
+	
+	private Rectangle rect;
+	private boolean hi;
+	
 	private BufferedImage[] orientations;
 	private int currentOrientation;
 	
@@ -32,7 +40,11 @@ public class Player extends Component implements KeyedComponent{
 		orientations[1] = new Graphic(0, 0, "resources/PPEast.png").getImage();
 		orientations[2] = new Graphic(0, 0, "resources/PPSouth.png").getImage();
 		orientations[3] = new Graphic(0, 0, "resources/PPWest.png").getImage();
+		xPos = this.getX();
+		yPos = this.getY();
 		
+		rect = new Rectangle(100, 100, 960, 540); 
+		hi = false;
 	}
 
 	@Override
@@ -56,6 +68,9 @@ public class Player extends Component implements KeyedComponent{
 			currentOrientation = 3;
 			this.move(getX()-movement, getY(), 30);
 	    	System.out.println("W");
+	    }else if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+	    	bullet();
+	    	
 	    }
 		
 	}
@@ -92,8 +107,17 @@ public class Player extends Component implements KeyedComponent{
 
 	@Override
 	public void update(Graphics2D g) {
-		// TODO Auto-generated method stub
+    	g.setColor(Color.YELLOW);
+    	g.draw(rect);
+    	g.fill(rect);
+
+	}
+	public void bullet() {
+		hi = !hi;
 		
+	}
+	public boolean bullet2() {
+		return hi;
 	}
 	
 }
