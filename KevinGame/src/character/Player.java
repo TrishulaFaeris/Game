@@ -8,6 +8,7 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import gui.components.Action;
 import gui.components.AnimatedComponent;
@@ -22,12 +23,9 @@ public class Player extends Component implements KeyedComponent{
 
 
 	private int movement;
-	private String iLocation;
 	private int xPos;
 	private int yPos;
-	
-	private Rectangle rect;
-	private boolean hi;
+	private ArrayList<Ammo> ammo;
 	
 	private BufferedImage[] orientations;
 	private int currentOrientation;
@@ -42,9 +40,7 @@ public class Player extends Component implements KeyedComponent{
 		orientations[3] = new Graphic(0, 0, "resources/PPWest.png").getImage();
 		xPos = this.getX();
 		yPos = this.getY();
-		
-		rect = new Rectangle(100, 100, 960, 540); 
-		hi = false;
+		ammo = new ArrayList<Ammo>();
 	}
 
 	@Override
@@ -69,16 +65,17 @@ public class Player extends Component implements KeyedComponent{
 			this.move(getX()-movement, getY(), 30);
 	    	System.out.println("W");
 	    }else if(e.getKeyCode() == KeyEvent.VK_SPACE) {
-	    	bullet();
-	    	
+	    	Ammo bullet = new Ammo(100, 100, 50, 50, "", Color.YELLOW, null);
+	    	ammo.
 	    }
 		
 	}
 	
+	public 
+	
 	public BufferedImage getImage(){
 		return orientations[currentOrientation];
 	}
-	
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
@@ -107,17 +104,9 @@ public class Player extends Component implements KeyedComponent{
 
 	@Override
 	public void update(Graphics2D g) {
-    	g.setColor(Color.YELLOW);
-    	g.draw(rect);
-    	g.fill(rect);
 
 	}
-	public void bullet() {
-		hi = !hi;
-		
-	}
-	public boolean bullet2() {
-		return hi;
-	}
+
+
 	
 }
