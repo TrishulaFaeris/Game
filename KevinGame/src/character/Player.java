@@ -35,7 +35,7 @@ public class Player extends Component implements KeyedComponent{
 	public Player(int x, int y, int width, int height) {
 		super(x,y,width,height);
 		
-		bullets = new Bullet[4];
+		bullets = new Bullet[1];
 		for(int i = 0; i < bullets.length; i++) {
 			bullets[i] = new Bullet(-50, -50);
 		}
@@ -69,7 +69,7 @@ public class Player extends Component implements KeyedComponent{
 	    }else if(e.getKeyCode() == KeyEvent.VK_SPACE) {
 	    	clipIndex = clipIndex % bullets.length;
 	    	bullets[clipIndex].setX(getX());
-	    	bullets[clipIndex].setY(getY());
+	    	bullets[clipIndex].setY(getY());    	
 	    	bullets[clipIndex].move(50, 50, 1000);
 	    	clipIndex++;
 	    }
