@@ -53,6 +53,18 @@ public abstract class Component implements Visible {
 		image = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 	}
 	
+	public Component(int x, int y, int w, int h, BufferedImage image){
+		this.x = x;
+		this.y = y;
+		this.w = w;
+		this.h = h;
+		this.alpha = 1.0f;
+		foreground = Color.black;
+		visible = true;
+		background = null;
+		this.image = image;
+	}
+	
 	
 	public boolean hasLeft() {
 		return left;

@@ -21,26 +21,32 @@ import gui.interfaces.KeyedComponent;
 
 public class Player extends Component implements KeyedComponent{
 
-
+	//how fast you move
 	private int movement;
-	private int xPos;
-	private int yPos;
-	private ArrayList<Ammo> ammo;
 	
+	//bullets related stuff
+	private Bullet[] bullets;
+	private int clipIndex;
+	
+	//player related stuff;
 	private BufferedImage[] orientations;
 	private int currentOrientation;
 	
 	public Player(int x, int y, int width, int height) {
 		super(x,y,width,height);
-		movement = 10;
+		
+		bullets = new Bullet[4];
+		for(int i = 0; i < bullets.length; i++) {
+			bullets[i] = new Bullet(-50, -50);
+		}
+		clipIndex = 0;
+		
 		orientations = new BufferedImage[4];
 		orientations[0] = new Graphic(0, 0, "resources/PPNorth.png").getImage();
 		orientations[1] = new Graphic(0, 0, "resources/PPEast.png").getImage();
 		orientations[2] = new Graphic(0, 0, "resources/PPSouth.png").getImage();
 		orientations[3] = new Graphic(0, 0, "resources/PPWest.png").getImage();
-		xPos = this.getX();
-		yPos = this.getY();
-		ammo = new ArrayList<Ammo>();
+		movement = 10;
 	}
 
 	@Override
@@ -48,33 +54,35 @@ public class Player extends Component implements KeyedComponent{
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
 			currentOrientation = 0;
 			this.move(getX(), getY()-movement, 15);
-			System.out.println("North");
 		}
 	    else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			currentOrientation = 1;
 			this.move(getX()+movement, getY(), 30);
-			System.out.println("E");
 	    }
 	    else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			currentOrientation = 2;
 			this.move(getX(), getY()+movement, 30);
-	    	System.out.println("S");
 		}
 	    else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			currentOrientation = 3;
 			this.move(getX()-movement, getY(), 30);
-	    	System.out.println("W");
 	    }else if(e.getKeyCode() == KeyEvent.VK_SPACE) {
-	    	Ammo bullet = new Ammo(100, 100, 50, 50, "", Color.YELLOW, null);
-	    	ammo.
+	    	clipIndex = clipIndex % bullets.length;
+	    	bullets[clipIndex].setX(getX());
+	    	bullets[clipIndex].setY(getY());
+	    	bullets[clipIndex].move(50, 50, 1000);
+	    	clipIndex++;
 	    }
 		
 	}
 	
-	public 
 	
 	public BufferedImage getImage(){
 		return orientations[currentOrientation];
+	}
+	
+	public Bullet[] getBullet() {
+		return bullets;
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
