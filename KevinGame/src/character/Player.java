@@ -71,7 +71,10 @@ public class Player extends Component implements KeyedComponent{
 	    	bullets[clipIndex].setX(getX());
 	    	bullets[clipIndex].setY(getY());    	
 	    	bullets[clipIndex].move(50, 50, 1000);
+	    	//make a new thread
 	    	clipIndex++;
+
+	    	
 	    }
 		
 	}
@@ -85,8 +88,7 @@ public class Player extends Component implements KeyedComponent{
 		return bullets;
 	}
 	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
+	public void keyReleased(KeyEvent e) {    
 		
 	}
 
