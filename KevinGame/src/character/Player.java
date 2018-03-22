@@ -69,8 +69,20 @@ public class Player extends Component implements KeyedComponent{
 	    }else if(e.getKeyCode() == KeyEvent.VK_SPACE) {
 	    	clipIndex = clipIndex % bullets.length;
 	    	bullets[clipIndex].setX(getX());
-	    	bullets[clipIndex].setY(getY());    	
-	    	bullets[clipIndex].move(50, 50, 1000);
+	    	bullets[clipIndex].setY(getY());    
+	    	new Thread() {
+		    	public void run() {
+		    		bullets[clipIndex].move(50, 50, 1000);
+		    		try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		    		;
+		    	}
+	    	}.start();	
+
 	    	//make a new thread
 	    	clipIndex++;
 
