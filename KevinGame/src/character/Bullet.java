@@ -15,16 +15,16 @@ import gui.interfaces.KeyedComponent;
 
 public class Bullet extends Component{
 
-	public static int standardWidth = 25;
-	public static int standardHeight = 25;
+	public static int standardWidth = 10;
+	public static int standardHeight = 10;
 	public static CustomImageButton standardBullet = new CustomImageButton(0, 0, standardWidth, standardHeight, new DrawInstructions() {
 		
 		@Override
 		public void draw(Graphics2D g, boolean highlight) {
 
-				g.setColor(Color.black);
+				g.setColor(Color.yellow);
 				g.setStroke(new BasicStroke(2));
-				g.drawRoundRect(0, 0, standardWidth, standardHeight, 8, 8);
+				g.fillRoundRect(0, 0, standardWidth, standardHeight, 8, 8);
 			
 		}
 	}, null);

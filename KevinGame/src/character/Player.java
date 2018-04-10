@@ -30,6 +30,7 @@ public class Player extends Component implements KeyedComponent{
 	private Bullet[] bullets;
 	private int clipIndex;
 	private boolean notlocked;
+	private int bulletDistance;
 	
 	//player related stuff;
 	private BufferedImage[] orientations;
@@ -38,19 +39,23 @@ public class Player extends Component implements KeyedComponent{
 	public Player(int x, int y, int width, int height) {
 		super(x,y,width,height);
 		
-		bullets = new Bullet[50];
-		for(int i = 0; i < bullets.length; i++) {
-			bullets[i] = new Bullet(-50, -50);
-		}
-		clipIndex = 0;
-		
+		//player direction
 		orientations = new BufferedImage[4];
 		orientations[0] = new Graphic(0, 0, "resources/PPNorth.png").getImage();
 		orientations[1] = new Graphic(0, 0, "resources/PPEast.png").getImage();
 		orientations[2] = new Graphic(0, 0, "resources/PPSouth.png").getImage();
 		orientations[3] = new Graphic(0, 0, "resources/PPWest.png").getImage();
 		movement = 10;
+		
+		//bullet stuff
+		bullets = new Bullet[50];
+		for(int i = 0; i < bullets.length; i++) {
+			bullets[i] = new Bullet(-50, -50);
+		}
+		clipIndex = 0;
+		bulletDistance = 150;
 		notlocked = true;
+
 	}
 
 	@Override
@@ -73,21 +78,7 @@ public class Player extends Component implements KeyedComponent{
 	    }else if(e.getKeyCode() == KeyEvent.VK_SPACE) {
 	    	if(notlocked == true) {
 		    	clipIndex = clipIndex % bullets.length;
-		    	bullets[clipIndex].setX(getX());
-		    	bullets[clipIndex].setY(getY());    
-		    	Utility.moveThen(bullets[clipIndex], 50, 50, 1000, new Action() {
-					
-		    		
-		    		int i = clipIndex;
-					@Override
-					public void act() {
-						// TODO Auto-generated method stub
-						bullets[i].setX(-100);
-						bullets[i].setY(-100);   
-						
-					}
-				});
-//	    		bullets[clipIndex].move(50, 50, 1000);
+		    	shootBullet();
 		    	clipIndex++;
 	    	}
 	    }
@@ -95,6 +86,67 @@ public class Player extends Component implements KeyedComponent{
 	}
 	
 	
+	private void shootBullet() {    
+    	bullets[clipIndex].setX(getX());
+    	bullets[clipIndex].setY(getY());
+    	if(currentOrientation == 0) {
+	    	Utility.moveThen(bullets[clipIndex], getX(), getY()-bulletDistance, 100, new Action() {
+				
+	    		
+	    		int i = clipIndex;
+				@Override
+				public void act() {
+					// TODO Auto-generated method stub
+					bullets[i].setX(-100);
+					bullets[i].setY(-100);   
+					
+				}
+			});
+    	}
+    	else if(currentOrientation  == 1) {
+    		Utility.moveThen(bullets[clipIndex], getX() + bulletDistance, getY(), 100, new Action() {
+				
+	    		
+	    		int i = clipIndex;
+				@Override
+				public void act() {
+					// TODO Auto-generated method stub
+					bullets[i].setX(-100);
+					bullets[i].setY(-100);   
+					
+				}
+			});
+    	}else if(currentOrientation == 2) {
+	    	Utility.moveThen(bullets[clipIndex], getX(), getY() + bulletDistance, 100, new Action() {
+				
+	    		
+	    		int i = clipIndex;
+				@Override
+				public void act() {
+					// TODO Auto-generated method stub
+					bullets[i].setX(-100);
+					bullets[i].setY(-100);   
+					
+				}
+			});
+    		
+    	}else if(currentOrientation == 3) {
+	    	Utility.moveThen(bullets[clipIndex], getX() - bulletDistance, getY(), 100, new Action() {
+				
+	    		
+	    		int i = clipIndex;
+				@Override
+				public void act() {
+					// TODO Auto-generated method stub
+					bullets[i].setX(-100);
+					bullets[i].setY(-100);   
+					
+				}
+			});
+    	}
+		
+	}
+
 	public BufferedImage getImage(){
 		return orientations[currentOrientation];
 	}
@@ -106,7 +158,6 @@ public class Player extends Component implements KeyedComponent{
 	public void keyReleased(KeyEvent e) {    
     	notlocked = true;
 	}
-
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub

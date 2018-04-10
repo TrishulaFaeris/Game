@@ -26,7 +26,7 @@ public class GameScreen extends FullFunctionScreen  {
 
 	@Override
 	public void initAllObjects(List<Visible> viewObjects) {
-		p = new Player(300,300,50,50);
+		p = new Player(300,300,25,25);
 		viewObjects.add(p);
 		for(Bullet b : p.getBullet()) {
 			viewObjects.add(b);
