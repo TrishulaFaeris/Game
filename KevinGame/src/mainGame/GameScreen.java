@@ -27,11 +27,13 @@ public class GameScreen extends FullFunctionScreen  {
 	public void initAllObjects(List<Visible> viewObjects) {
 		p = new Player(300,300,25,25);
 		c = new NPC(100, 100, 25, 25);
+		c.facePlayer(p.getX(), p.getY());
 		viewObjects.add(p);
 		for(Bullet b : p.getBullet()) {
 			viewObjects.add(b);
 		}
 		viewObjects.add(c);
+		//to make the game running, a thread and a while loop or vice versa
 	}
 
 
