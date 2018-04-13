@@ -15,12 +15,16 @@ import gui.components.ImageTextButton;
 public class NPC extends Component{
 	
 	private int movement;
+	private int currentOrientation;
 	private BufferedImage[] orientations;
 	
 	public NPC(int x, int y, int w, int h) {
 		super(x, y, w, h);
 		orientations = new BufferedImage[4];
 		orientations[0] = new Graphic(0, 0, "resources/ZFront.png").getImage();
+		orientations[1] = new Graphic(0, 0, "resources/ZRight.png").getImage();
+		orientations[2] = new Graphic(0, 0, "resources/ZBack.png").getImage();
+		orientations[3] = new Graphic(0, 0, "resources/ZLeft.png").getImage();
 
 		movement = 10;
 	}
@@ -30,7 +34,22 @@ public class NPC extends Component{
 		
 	}
 	public BufferedImage getImage(){
-		return orientations[0];
+		return orientations[currentOrientation];
+	}
+	public void facePlayer(int xpos, int ypos) {
+		if(xpos - getX() > 0 && ypos - getY() > 0) {
+			currentOrientation = (int) ((Math.random()*2)+1);
+		}else if(xpos - getX() < 0 && ypos - getY() > 0) {
+			if(Math.random() < 0.49) {
+				currentOrientation = 1;
+			}else {
+				currentOrientation = 4;
+			}
+		}else if(xpos - getX() < 0 && ypos - getY() < 0) {
+			currentOrientation = (int) ((Math.random()*2)+3);
+		}else if(xpos - getX() > 0 && ypos - getY() < 0) {
+			currentOrientation = (int) ((Math.random()*2)+2);
+		}
 	}
 }
 
