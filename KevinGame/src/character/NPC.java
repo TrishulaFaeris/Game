@@ -37,11 +37,23 @@ public class NPC extends Component{
 		return orientations[currentOrientation];
 	}
 	public void facePlayer(int xpos, int ypos) {
-		/* npc location - player location
-		* if negative, that means the npc is right(xpos)/top(yps) in relative to the player location
-		* if positive, that means the npc is left(xpos)/bottom(ypos) in relative to the player location
-		* just to make sure, print out the int
+		/* player location - npc location
+		*top is 0, right is 1, bot is 2, left is 3;
 		*/
+		if(xpos - getX() > 0 && ypos - getY() < 0) {
+			currentOrientation = (int) (Math.random() * 2);
+		}else if(xpos - getX() > 0 && ypos - getY() > 0) {
+			currentOrientation = (int) (Math.random() * 2) + 1;
+		}else if(xpos - getX() < 0 && ypos - getY() > 0) {
+			currentOrientation = (int) (Math.random() * 2) + 2;
+		}else{
+			if(Math.random() < 0.49) {
+				currentOrientation = 0;
+				
+			}else {
+				currentOrientation = 3;
+			}
+		}
 	}
 }
 
