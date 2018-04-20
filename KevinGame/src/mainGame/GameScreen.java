@@ -33,7 +33,6 @@ public class GameScreen extends FullFunctionScreen  {
 			viewObjects.add(b);
 		}
 		viewObjects.add(c);
-		//to make the game running, a thread and a while loop or vice versa
 	}
 
 
