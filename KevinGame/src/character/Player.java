@@ -31,6 +31,8 @@ public class Player extends Component implements KeyedComponent{
 	private int clipIndex;
 	private boolean notlocked;
 	private int bulletDistance;
+	private int width;
+	private int height;
 	
 	//player related stuff;
 	private BufferedImage[] orientations;
@@ -46,6 +48,10 @@ public class Player extends Component implements KeyedComponent{
 		orientations[2] = new Graphic(0, 0, "resources/PPSouth.png").getImage();
 		orientations[3] = new Graphic(0, 0, "resources/PPWest.png").getImage();
 		movement = 10;
+		
+		//player stuff
+		this.width = width;
+		this.height = height;
 		
 		//bullet stuff
 		bullets = new Bullet[50];
@@ -86,9 +92,15 @@ public class Player extends Component implements KeyedComponent{
 	}
 	
 	
-	private void shootBullet() {    
-    	bullets[clipIndex].setX(getX());
-    	bullets[clipIndex].setY(getY());
+	private void shootBullet() {
+		//need to fix, I suggest that pics to be remade, and the bullets to be shotten off the gun,
+    	if(currentOrientation == 2 || currentOrientation == 3) {
+    		bullets[clipIndex].setX(getX());
+        	bullets[clipIndex].setY(getY());
+    	}else {
+    		bullets[clipIndex].setX(getX() + width - bullets[clipIndex].getWidth());
+        	bullets[clipIndex].setY(getY() + height - bullets[clipIndex].getHeight());
+    	}
     	if(currentOrientation == 0) {
 	    	Utility.moveThen(bullets[clipIndex], getX(), getY()-bulletDistance, 100, new Action() {
 				
