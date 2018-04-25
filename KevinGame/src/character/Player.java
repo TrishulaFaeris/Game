@@ -43,7 +43,7 @@ public class Player extends Component implements KeyedComponent{
 		
 		//player direction
 		orientations = new BufferedImage[4];
-		orientations[0] = new Graphic(0, 0, "resources/PPNorth.png").getImage();
+		orientations[0] = new Graphic(0, 0, "resources/PPNorthT.png").getImage();
 		orientations[1] = new Graphic(0, 0, "resources/PPEast.png").getImage();
 		orientations[2] = new Graphic(0, 0, "resources/PPSouth.png").getImage();
 		orientations[3] = new Graphic(0, 0, "resources/PPWest.png").getImage();

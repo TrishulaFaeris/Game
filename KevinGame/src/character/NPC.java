@@ -11,15 +11,19 @@ import gui.components.Button;
 import gui.components.Component;
 import gui.components.Graphic;
 import gui.components.ImageTextButton;
+import gui.components.MovingComponent;
+import mainGame.GameScreen;
 
-public class NPC extends Component{
+public class NPC extends MovingComponent{
 	
 	private int movement;
 	private int currentOrientation;
 	private BufferedImage[] orientations;
-	
+	private int playerX;
+	private int playerY;
 	public NPC(int x, int y, int w, int h) {
 		super(x, y, w, h);
+		//make the images transparent
 		orientations = new BufferedImage[4];
 		orientations[0] = new Graphic(0, 0, "resources/ZFront.png").getImage();
 		orientations[1] = new Graphic(0, 0, "resources/ZRight.png").getImage();
@@ -35,17 +39,14 @@ public class NPC extends Component{
 
 		movement = 10;
 	}
-	@Override
-	public void update(Graphics2D g) {
-		// TODO Auto-generated method stub
-		
-	}
+
 	public BufferedImage getImage(){
 		return orientations[currentOrientation];
 	}
 	public void facePlayer(int xpos, int ypos) {
 		/* player location - npc location
 		*top is 0, right is 1, bot is 2, left is 3;
+		*change, remove the randomless, if the distance to the sides is greater top and bottom, face right, etc, calculate at home
 		*/
 		if(xpos - getX() > 0 && ypos - getY() < 0) {
 			currentOrientation = (int) (Math.random() * 2);
@@ -61,6 +62,25 @@ public class NPC extends Component{
 				currentOrientation = 3;
 			}
 		}
+	}
+	@Override
+	public void drawImage(Graphics2D g) {
+		// TODO Auto-generated method stub
+		//method doesnt do anything since getImage is overrided
+		//to add *animations* delete the getImage and update this instead and use this
+		
+	}
+	@Override
+	public void checkBehaviors() {
+		playerX = GameScreen.p.getX();
+		playerY = GameScreen.p.getY();
+		facePlayer(playerX, playerY);
+		setVx((playerX - getX())/10);
+		setVy((playerY - getY())/10);
+		//setVx(1);
+		//setVy(1);
+
+		
 	}
 }
 

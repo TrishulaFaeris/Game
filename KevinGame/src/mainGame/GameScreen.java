@@ -15,7 +15,7 @@ public class GameScreen extends FullFunctionScreen  {
 	/**
 	 * 
 	 */
-	private Player p;
+	public static Player p;
 	private NPC c;
 	private static final long serialVersionUID = -8743834112365285160L;
 	public GameScreen(int width, int height) {
@@ -27,7 +27,9 @@ public class GameScreen extends FullFunctionScreen  {
 	public void initAllObjects(List<Visible> viewObjects) {
 		p = new Player(300,300,25,25);
 		c = new NPC(200, 400, 25, 25);
-		c.facePlayer(p.getX(), p.getY());
+		//add multiple threads
+		Thread firstPhase = new Thread(c);
+		firstPhase.start();
 		for(Bullet b : p.getBullet()) {
 			viewObjects.add(b);
 		}
