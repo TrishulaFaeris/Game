@@ -25,6 +25,13 @@ public class NPC extends Component{
 		orientations[1] = new Graphic(0, 0, "resources/ZRight.png").getImage();
 		orientations[2] = new Graphic(0, 0, "resources/ZBack.png").getImage();
 		orientations[3] = new Graphic(0, 0, "resources/ZLeft.png").getImage();
+		/*the pic should look like this
+		 * from the edge of the body to the edge of the gun is 3pixel
+			___
+		   |   |
+		_3_|   |____
+	   |*/
+		
 
 		movement = 10;
 	}
