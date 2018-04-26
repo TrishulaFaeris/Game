@@ -42,10 +42,11 @@ public class Player extends Component implements KeyedComponent{
 		super(x,y,width,height);
 		
 		/*the pic should look like this
-		 * from the edge of the body to the edge of the gun is 3pixel
+		 * from the edge of the body to the edge of the gun is 3 pixel
 		 * the width of gun is 7
 		 * and the height is 13
 		 * body is 25 by 25
+		 * so the is 25 (width) by 38(height)
 			___
 		   |   |
 		_3_|   |____
