@@ -30,11 +30,11 @@ public class NPC extends MovingComponent{
 		orientations[2] = new Graphic(0, 0, "resources/ZSouth.png").getImage();
 		orientations[3] = new Graphic(0, 0, "resources/ZWest.png").getImage();
 		/*the pic should look like this
-		 * from the edge of the body to the edge of the gun is 5pixel
+		 * from the edge of the body to the arm is 3 pixels
 		 * the width of gun is 7
 		 * and the height is 13
 		 * body is 25 by 25
-		 * overall image is 27 width by 42 height
+		 * overall image is 25 width by 38 height
 			___
 		   |   |
 		_3_|   |____
