@@ -41,12 +41,22 @@ public class Player extends Component implements KeyedComponent{
 	public Player(int x, int y, int width, int height) {
 		super(x,y,width,height);
 		
+		/*the pic should look like this
+		 * from the edge of the body to the edge of the gun is 3pixel
+		 * the width of gun is 7
+		 * and the height is 13
+		 * body is 25 by 25
+			___
+		   |   |
+		_3_|   |____
+	   |*/
+		
 		//player direction
 		orientations = new BufferedImage[4];
-		orientations[0] = new Graphic(0, 0, "resources/PPNorthT.png").getImage();
-		orientations[1] = new Graphic(0, 0, "resources/PPEast.png").getImage();
-		orientations[2] = new Graphic(0, 0, "resources/PPSouth.png").getImage();
-		orientations[3] = new Graphic(0, 0, "resources/PPWest.png").getImage();
+		orientations[0] = new Graphic(0, 0, "resources/PNorth.png").getImage();
+		orientations[1] = new Graphic(0, 0, "resources/PEast.png").getImage();
+		orientations[2] = new Graphic(0, 0, "resources/PSouth.png").getImage();
+		orientations[3] = new Graphic(0, 0, "resources/PWest.png").getImage();
 		movement = 10;
 		
 		//player stuff

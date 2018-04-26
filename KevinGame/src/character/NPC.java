@@ -25,12 +25,16 @@ public class NPC extends MovingComponent{
 		super(x, y, w, h);
 		//make the images transparent
 		orientations = new BufferedImage[4];
-		orientations[0] = new Graphic(0, 0, "resources/ZFront.png").getImage();
-		orientations[1] = new Graphic(0, 0, "resources/ZRight.png").getImage();
-		orientations[2] = new Graphic(0, 0, "resources/ZBack.png").getImage();
-		orientations[3] = new Graphic(0, 0, "resources/ZLeft.png").getImage();
+		orientations[0] = new Graphic(0, 0, "resources/ZNorth.png").getImage();
+		orientations[1] = new Graphic(0, 0, "resources/ZEast.png").getImage();
+		orientations[2] = new Graphic(0, 0, "resources/ZSouth.png").getImage();
+		orientations[3] = new Graphic(0, 0, "resources/ZWest.png").getImage();
 		/*the pic should look like this
-		 * from the edge of the body to the edge of the gun is 3pixel
+		 * from the edge of the body to the edge of the gun is 5pixel
+		 * the width of gun is 7
+		 * and the height is 13
+		 * body is 25 by 25
+		 * overall image is 27 width by 42 height
 			___
 		   |   |
 		_3_|   |____
