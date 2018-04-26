@@ -52,19 +52,26 @@ public class NPC extends MovingComponent{
 		*top is 0, right is 1, bot is 2, left is 3;
 		*change, remove the randomless, if the distance to the sides is greater top and bottom, face right, etc, calculate at home
 		*/
-		if(xpos - getX() > 0 && ypos - getY() < 0) {
-			currentOrientation = (int) (Math.random() * 2);
-		}else if(xpos - getX() > 0 && ypos - getY() > 0) {
-			currentOrientation = (int) (Math.random() * 2) + 1;
-		}else if(xpos - getX() < 0 && ypos - getY() > 0) {
-			currentOrientation = (int) (Math.random() * 2) + 2;
-		}else{
-			if(Math.random() < 0.49) {
+		if(xpos - getX() >= 0 && ypos - getY() <= 0) {
+			if(checkGreater(xpos - getX(), ypos - getY())) 
+				currentOrientation = 1; 
+			else 
 				currentOrientation = 0;
-				
-			}else {
-				currentOrientation = 3;
-			}
+		}else if(xpos - getX() >= 0 && ypos - getY() >= 0) {
+			if(checkGreater(xpos - getX(), ypos - getY())) 
+				currentOrientation = 1; 
+			else 
+				currentOrientation = 2;
+		}else if(xpos - getX() <= 0 && ypos - getY() >= 0) {
+			if(checkGreater(xpos - getX(), ypos - getY())) 
+				currentOrientation = 3; 
+			else 
+				currentOrientation = 2;
+		}else{
+			if(checkGreater(xpos - getX(), ypos - getY())) 
+				currentOrientation = 3; 
+			else 
+				currentOrientation = 0;
 		}
 	}
 	@Override
@@ -85,6 +92,11 @@ public class NPC extends MovingComponent{
 		//setVy(1);
 
 		
+	}
+	public boolean checkGreater(int a , int b) {
+		if(Math.abs(a) > Math.abs(b))
+			return true;
+		return false;
 	}
 }
 

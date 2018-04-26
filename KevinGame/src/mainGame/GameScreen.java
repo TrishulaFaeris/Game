@@ -26,7 +26,7 @@ public class GameScreen extends FullFunctionScreen  {
 	@Override
 	public void initAllObjects(List<Visible> viewObjects) {
 		p = new Player(300,300,25,25);
-		c = new NPC(200, 400, 25, 25);
+		c = new NPC(200, 300, 25, 25);
 		//add multiple threads
 		Thread firstPhase = new Thread(c);
 		firstPhase.start();
