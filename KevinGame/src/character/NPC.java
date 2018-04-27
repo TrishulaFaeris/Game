@@ -83,11 +83,19 @@ public class NPC extends MovingComponent{
 	}
 	@Override
 	public void checkBehaviors() {
+		//need to add object
 		playerX = GameScreen.p.getX();
 		playerY = GameScreen.p.getY();
 		facePlayer(playerX, playerY);
-		setVx((playerX - getX())/10);
-		setVy((playerY - getY())/10);
+		if(currentOrientation == 0) {
+			setVy(-1);
+		}else if(currentOrientation == 2) {
+			setVy(1);
+		}else if(currentOrientation == 3) {
+			setVx(-1);
+		}else if(currentOrientation == 1) {
+			setVx(1);
+		}
 		//setVx(1);
 		//setVy(1);
 
