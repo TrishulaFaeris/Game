@@ -22,7 +22,7 @@ public class Bullet extends Component{
 		@Override
 		public void draw(Graphics2D g, boolean highlight) {
 
-				g.setColor(Color.yellow);
+				g.setColor(Color.LIGHT_GRAY);
 				g.setStroke(new BasicStroke(2));
 				g.fillRoundRect(0, 0, standardWidth, standardHeight, 8, 8);
 			

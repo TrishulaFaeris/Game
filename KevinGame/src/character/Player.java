@@ -70,7 +70,7 @@ public class Player extends Component implements KeyedComponent{
 			bullets[i] = new Bullet(-50, -50);
 		}
 		clipIndex = 0;
-		bulletDistance = 150;
+		bulletDistance = 300;
 		notlocked = true;
 
 	}
@@ -113,7 +113,7 @@ public class Player extends Component implements KeyedComponent{
         	bullets[clipIndex].setY(getY() + height - bullets[clipIndex].getHeight());
     	}
     	if(currentOrientation == 0) {
-	    	Utility.moveThen(bullets[clipIndex], getX(), getY()-bulletDistance, 100, new Action() {
+	    	Utility.moveThen(bullets[clipIndex], getX(), getY()-bulletDistance, 500, new Action() {
 				
 	    		
 	    		int i = clipIndex;
@@ -127,7 +127,7 @@ public class Player extends Component implements KeyedComponent{
 			});
     	}
     	else if(currentOrientation  == 1) {
-    		Utility.moveThen(bullets[clipIndex], getX() + bulletDistance, getY(), 100, new Action() {
+    		Utility.moveThen(bullets[clipIndex], getX() + bulletDistance, getY(), 500, new Action() {
 				
 	    		
 	    		int i = clipIndex;
@@ -140,7 +140,7 @@ public class Player extends Component implements KeyedComponent{
 				}
 			});
     	}else if(currentOrientation == 2) {
-	    	Utility.moveThen(bullets[clipIndex], getX(), getY() + bulletDistance, 100, new Action() {
+	    	Utility.moveThen(bullets[clipIndex], getX(), getY() + bulletDistance, 500, new Action() {
 				
 	    		
 	    		int i = clipIndex;
@@ -154,7 +154,7 @@ public class Player extends Component implements KeyedComponent{
 			});
     		
     	}else if(currentOrientation == 3) {
-	    	Utility.moveThen(bullets[clipIndex], getX() - bulletDistance, getY(), 100, new Action() {
+	    	Utility.moveThen(bullets[clipIndex], getX() - bulletDistance, getY(), 500, new Action() {
 				
 	    		
 	    		int i = clipIndex;
