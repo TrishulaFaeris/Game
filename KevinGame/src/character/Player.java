@@ -79,19 +79,19 @@ public class Player extends Component implements KeyedComponent{
 	public void keyPressed(KeyEvent e) { 
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
 			currentOrientation = 0;
-			this.move(getX(), getY()-movement, 15);
+			this.move(getX(), getY()-movement, 50);
 		}
 	    else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			currentOrientation = 1;
-			this.move(getX()+movement, getY(), 15);
+			this.move(getX()+movement, getY(), 50);
 	    }
 	    else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			currentOrientation = 2;
-			this.move(getX(), getY()+movement, 15);
+			this.move(getX(), getY()+movement, 50);
 		}
 	    else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			currentOrientation = 3;
-			this.move(getX()-movement, getY(), 15);
+			this.move(getX()-movement, getY(), 50);
 	    }else if(e.getKeyCode() == KeyEvent.VK_SPACE) {
 	    	if(notlocked == true) {
 		    	clipIndex = clipIndex % bullets.length;
@@ -105,6 +105,7 @@ public class Player extends Component implements KeyedComponent{
 	
 	private void shootBullet() {
 		//need to fix, I suggest that pics to be remade, and the bullets to be shotten off the gun,
+		//re: needs to be 3pixel off, so need more if else
     	if(currentOrientation == 2 || currentOrientation == 3) {
     		bullets[clipIndex].setX(getX());
         	bullets[clipIndex].setY(getY());

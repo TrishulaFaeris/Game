@@ -51,24 +51,25 @@ public class NPC extends MovingComponent{
 		/* player location - npc location
 		*top is 0, right is 1, bot is 2, left is 3;
 		*change, remove the randomless, if the distance to the sides is greater top and bottom, face right, etc, calculate at home
+		*there is this constance shuffling if diagional, instead of zero, need to have some leeway, which means wee, more calc.
 		*/
 		if(xpos - getX() >= 0 && ypos - getY() <= 0) {
-			if(checkGreater(xpos - getX(), ypos - getY())) 
+			if(checkGreaterOrEqual(xpos - getX(), ypos - getY())) 
 				currentOrientation = 1; 
 			else 
 				currentOrientation = 0;
 		}else if(xpos - getX() >= 0 && ypos - getY() >= 0) {
-			if(checkGreater(xpos - getX(), ypos - getY())) 
+			if(checkGreaterOrEqual(xpos - getX(), ypos - getY())) 
 				currentOrientation = 1; 
 			else 
 				currentOrientation = 2;
 		}else if(xpos - getX() <= 0 && ypos - getY() >= 0) {
-			if(checkGreater(xpos - getX(), ypos - getY())) 
+			if(checkGreaterOrEqual(xpos - getX(), ypos - getY())) 
 				currentOrientation = 3; 
 			else 
 				currentOrientation = 2;
 		}else{
-			if(checkGreater(xpos - getX(), ypos - getY())) 
+			if(checkGreaterOrEqual(xpos - getX(), ypos - getY())) 
 				currentOrientation = 3; 
 			else 
 				currentOrientation = 0;
@@ -88,23 +89,28 @@ public class NPC extends MovingComponent{
 		playerY = GameScreen.p.getY();
 		facePlayer(playerX, playerY);
 		if(currentOrientation == 0) {
-			setVy(-1);
+			setVx(0);
+			setVy(-2);
 		}else if(currentOrientation == 2) {
-			setVy(1);
+			setVy(2);
+			setVx(0);
 		}else if(currentOrientation == 3) {
-			setVx(-1);
+			setVx(-2);
+			setVy(0);
 		}else if(currentOrientation == 1) {
-			setVx(1);
+			setVx(2);
+			setVy(0);
 		}
 		//setVx(1);
 		//setVy(1);
 
 		
 	}
-	public boolean checkGreater(int a , int b) {
-		if(Math.abs(a) > Math.abs(b))
+	public boolean checkGreaterOrEqual(int a , int b) {
+		if(Math.abs(a) >= Math.abs(b))
 			return true;
-		return false;
+		else 
+			return false;
 	}
 }
 
