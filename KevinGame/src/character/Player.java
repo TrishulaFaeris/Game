@@ -106,15 +106,10 @@ public class Player extends Component implements KeyedComponent{
 	private void shootBullet() {
 		//need to fix, I suggest that pics to be remade, and the bullets to be shotten off the gun,
 		//re: needs to be 3pixel off, so need more if else
-    	if(currentOrientation == 2 || currentOrientation == 3) {
-    		bullets[clipIndex].setX(getX());
-        	bullets[clipIndex].setY(getY());
-    	}else {
-    		bullets[clipIndex].setX(getX() + width - bullets[clipIndex].getWidth());
-        	bullets[clipIndex].setY(getY() + height - bullets[clipIndex].getHeight());
-    	}
     	if(currentOrientation == 0) {
-	    	Utility.moveThen(bullets[clipIndex], getX(), getY()-bulletDistance, 500, new Action() {
+    		bullets[clipIndex].setX((getX() + width - bullets[clipIndex].getWidth() - 1));
+        	bullets[clipIndex].setY(getY());
+	    	Utility.moveThen(bullets[clipIndex], (getX() + width - bullets[clipIndex].getWidth() - 1), getY()-bulletDistance, 500, new Action() {
 				
 	    		
 	    		int i = clipIndex;
@@ -128,7 +123,9 @@ public class Player extends Component implements KeyedComponent{
 			});
     	}
     	else if(currentOrientation  == 1) {
-    		Utility.moveThen(bullets[clipIndex], getX() + bulletDistance, getY(), 500, new Action() {
+    		bullets[clipIndex].setX(getX() + width - bullets[clipIndex].getWidth());
+        	bullets[clipIndex].setY(getY() + height - bullets[clipIndex].getHeight() - 1);
+    		Utility.moveThen(bullets[clipIndex], getX() + bulletDistance, getY() + height - bullets[clipIndex].getHeight() - 1, 500, new Action() {
 				
 	    		
 	    		int i = clipIndex;
@@ -141,7 +138,9 @@ public class Player extends Component implements KeyedComponent{
 				}
 			});
     	}else if(currentOrientation == 2) {
-	    	Utility.moveThen(bullets[clipIndex], getX(), getY() + bulletDistance, 500, new Action() {
+    		bullets[clipIndex].setX(getX() + 1);
+        	bullets[clipIndex].setY(getY() + height + bullets[clipIndex].getHeight());
+    		Utility.moveThen(bullets[clipIndex], getX(), getY() + height + bullets[clipIndex].getHeight()+ bulletDistance, 500, new Action() {
 				
 	    		
 	    		int i = clipIndex;
@@ -155,9 +154,10 @@ public class Player extends Component implements KeyedComponent{
 			});
     		
     	}else if(currentOrientation == 3) {
+    		bullets[clipIndex].setX(getX() + 1 + bullets[clipIndex].getWidth());
+    		bullets[clipIndex].setY(getY() + bullets[clipIndex].getWidth());
+   	
 	    	Utility.moveThen(bullets[clipIndex], getX() - bulletDistance, getY(), 500, new Action() {
-				
-	    		
 	    		int i = clipIndex;
 				@Override
 				public void act() {
