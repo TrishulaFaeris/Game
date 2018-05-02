@@ -54,27 +54,42 @@ public class NPC extends MovingComponent{
 		*top is 0, right is 1, bot is 2, left is 3;
 		*change, remove the randomless, if the distance to the sides is greater top and bottom, face right, etc, calculate at home
 		*there is this constance shuffling if diagional, instead of zero, need to have some leeway, which means wee, more calc.
+		*
 		*/
 		if(xpos - getX() >= 0 && ypos - getY() <= 0) {
-			if(checkGreater(xpos - getX(), ypos - getY())) 
-				currentOrientation = 0;
-			else
-				currentOrientation = 1;
+			if(!checkEqual(xpos - getX(), ypos - getY())){
+				if(checkGreater(xpos - getX(), ypos - getY())) 
+					currentOrientation = 0;
+				else
+					currentOrientation = 1;
+			}else 
+				currentOrientation = pCurrentOrientation;
 		}else if(xpos - getX() >= 0 && ypos - getY() >= 0) {
-			if(checkGreater(xpos - getX(), ypos - getY())) 
-				currentOrientation = 1; 
-			else 
-				currentOrientation = 2;
+			if(!checkEqual(xpos - getX(), ypos - getY())) {
+				if(checkGreater(xpos - getX(), ypos - getY())) 
+					currentOrientation = 1; 
+				else 
+					currentOrientation = 2;
+			}else
+				currentOrientation  = pCurrentOrientation;
 		}else if(xpos - getX() <= 0 && ypos - getY() >= 0) {
-			if(checkGreater(xpos - getX(), ypos - getY())) 
-				currentOrientation = 3; 
-			else 
-				currentOrientation = 2;
+			if(!checkEqual(xpos - getX(), ypos - getY())) {
+				if(checkGreater(xpos - getX(), ypos - getY())) 
+					currentOrientation = 3; 
+				else 
+					currentOrientation = 2;
+			} else
+				currentOrientation = pCurrentOrientation;
+
 		}else{
-			if(checkGreater(xpos - getX(), ypos - getY())) 
-				currentOrientation = 3; 
-			else 
-				currentOrientation = 0;
+			if(!checkEqual(xpos - getX(), ypos - getY())) {
+				if(checkGreater(xpos - getX(), ypos - getY())) 
+					currentOrientation = 3; 
+				else 
+					currentOrientation = 0;
+			}else {
+				currentOrientation = pCurrentOrientation;
+			}
 		}
 	}
 	@Override
@@ -125,7 +140,7 @@ public class NPC extends MovingComponent{
 			return false;
 	}
 	public boolean checkEqual(int a, int b) {
-		if(Math.abs(a) > Math.abs(b))
+		if(Math.abs(a) == Math.abs(b))
 			return true;
 		else 
 			return false;
