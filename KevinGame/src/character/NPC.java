@@ -21,6 +21,7 @@ public class NPC extends MovingComponent{
 	private BufferedImage[] orientations;
 	private int playerX;
 	private int playerY;
+	private int pCurrentOrientation;
 	public NPC(int x, int y, int w, int h) {
 		super(x, y, w, h);
 		//make the images transparent
@@ -42,6 +43,7 @@ public class NPC extends MovingComponent{
 		
 
 		movement = 10;
+		pCurrentOrientation = GameScreen.p.getCurrentOrientation();
 	}
 
 	public BufferedImage getImage(){
@@ -54,22 +56,22 @@ public class NPC extends MovingComponent{
 		*there is this constance shuffling if diagional, instead of zero, need to have some leeway, which means wee, more calc.
 		*/
 		if(xpos - getX() >= 0 && ypos - getY() <= 0) {
-			if(checkGreaterOrEqual(xpos - getX(), ypos - getY())) 
-				currentOrientation = 1; 
-			else 
+			if(checkGreater(xpos - getX(), ypos - getY())) 
 				currentOrientation = 0;
+			else
+				currentOrientation = 1;
 		}else if(xpos - getX() >= 0 && ypos - getY() >= 0) {
-			if(checkGreaterOrEqual(xpos - getX(), ypos - getY())) 
+			if(checkGreater(xpos - getX(), ypos - getY())) 
 				currentOrientation = 1; 
 			else 
 				currentOrientation = 2;
 		}else if(xpos - getX() <= 0 && ypos - getY() >= 0) {
-			if(checkGreaterOrEqual(xpos - getX(), ypos - getY())) 
+			if(checkGreater(xpos - getX(), ypos - getY())) 
 				currentOrientation = 3; 
 			else 
 				currentOrientation = 2;
 		}else{
-			if(checkGreaterOrEqual(xpos - getX(), ypos - getY())) 
+			if(checkGreater(xpos - getX(), ypos - getY())) 
 				currentOrientation = 3; 
 			else 
 				currentOrientation = 0;
@@ -89,16 +91,26 @@ public class NPC extends MovingComponent{
 		playerY = GameScreen.p.getY();
 		facePlayer(playerX, playerY);
 		if(currentOrientation == 0) {
-			setVx(0);
-			setVy(-2);
+			if(playerX - getX() <= getWidth() && Math.abs(playerY - getY()) <= 25) {
+				setVx(0);
+				setVy(0);
+			}else {
+				setVx(0);
+				setVy(-2);
+			}
+		}else if(currentOrientation == 1) {
+			if(playerX - getX() <= getHeight() && Math.abs(playerY - getY()) <= getWidth()) {
+				setVx(0);
+				setVy(0);
+			}else {
+				setVx(2);
+				setVy(0);
+			}
 		}else if(currentOrientation == 2) {
 			setVy(2);
 			setVx(0);
 		}else if(currentOrientation == 3) {
 			setVx(-2);
-			setVy(0);
-		}else if(currentOrientation == 1) {
-			setVx(2);
 			setVy(0);
 		}
 		//setVx(1);
@@ -106,8 +118,14 @@ public class NPC extends MovingComponent{
 
 		
 	}
-	public boolean checkGreaterOrEqual(int a , int b) {
-		if(Math.abs(a) >= Math.abs(b))
+	public boolean checkGreater(int a , int b) {
+		if(Math.abs(a) > Math.abs(b))
+			return true;
+		else 
+			return false;
+	}
+	public boolean checkEqual(int a, int b) {
+		if(Math.abs(a) > Math.abs(b))
 			return true;
 		else 
 			return false;

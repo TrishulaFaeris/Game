@@ -79,19 +79,19 @@ public class Player extends Component implements KeyedComponent{
 	public void keyPressed(KeyEvent e) { 
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
 			currentOrientation = 0;
-			this.move(getX(), getY()-movement, 50);
+			this.move(getX(), getY()-movement, 40);
 		}
 	    else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			currentOrientation = 1;
-			this.move(getX()+movement, getY(), 50);
+			this.move(getX()+movement, getY(), 40);
 	    }
 	    else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			currentOrientation = 2;
-			this.move(getX(), getY()+movement, 50);
+			this.move(getX(), getY()+movement, 40);
 		}
 	    else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			currentOrientation = 3;
-			this.move(getX()-movement, getY(), 50);
+			this.move(getX()-movement, getY(), 40);
 	    }else if(e.getKeyCode() == KeyEvent.VK_SPACE) {
 	    	if(notlocked == true) {
 		    	clipIndex = clipIndex % bullets.length;
@@ -185,6 +185,10 @@ public class Player extends Component implements KeyedComponent{
 	
 	public boolean checkHit() {
 		return true;
+	}
+	
+	public int getCurrentOrientation() {
+		return currentOrientation;
 	}
 	@Override
 	public void keyTyped(KeyEvent e) {
