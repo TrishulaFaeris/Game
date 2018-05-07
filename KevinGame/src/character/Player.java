@@ -182,7 +182,22 @@ public class Player extends Component implements KeyedComponent{
 	public void keyReleased(KeyEvent e) {    
     	notlocked = true;
 	}
-	
+	public void moveAfterCheck(int x, int y) {
+			if(!checkBoundX(x)) {
+				//move
+			}
+			if(!checkBoundY(y)) {
+				//move
+			}
+	}
+	//the check bound method checks if it in bounds, if it is false, move it the bounded region in this case is 960
+	public boolean checkBoundX(int x) {
+		return true;
+	}
+	//same as the top but 560 is the bounded region
+	public boolean checkBoundY(int y) {
+		return true;
+	}
 	public boolean checkHit() {
 		return true;
 	}

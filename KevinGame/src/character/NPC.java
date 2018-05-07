@@ -109,7 +109,7 @@ public class NPC extends MovingComponent{
 			if(playerX - getX() < getHeight() && Math.abs(playerY - getY()) < getWidth()) {
 				setVx(0);
 				setVy(0);
-				//GameScreen.p.move(playerX, playerY - 50, 30);
+				GameScreen.p.move(playerX, playerY - 50, 30);
 			}else {
 				setVx(0);
 				setVy(-2);
@@ -118,7 +118,8 @@ public class NPC extends MovingComponent{
 			if(playerX - getX() < getHeight() && Math.abs(playerY - getY()) < getWidth()) {
 				setVx(0);
 				setVy(0);
-				//GameScreen.p.move(playerX + 50, playerY, 30);
+				
+				GameScreen.p.move(playerX + 50, playerY, 30);
 			}else {
 				setVx(2);
 				setVy(0);
@@ -127,7 +128,7 @@ public class NPC extends MovingComponent{
 			if(playerX - getX() < getWidth() && Math.abs(playerY - getY()) < getHeight()) {
 				setVx(0);
 				setVy(0);
-				//GameScreen.p.move(playerX, playerY + 50, 30);
+				GameScreen.p.move(playerX, playerY + 50, 30);
 			}else{
 				setVy(2);
 				setVx(0);	
@@ -137,7 +138,7 @@ public class NPC extends MovingComponent{
 			if(Math.abs(playerX - getX()) < getWidth() && Math.abs(playerY - getY()) < getHeight())  {
 				setVx(0);
 				setVy(0);
-				//GameScreen.p.move(playerX - 50, playerY, 30);
+				GameScreen.p.move(playerX - 50, playerY, 30);
 			}else{
 				setVx(-2);
 				setVy(0);
