@@ -106,46 +106,47 @@ public class NPC extends MovingComponent{
 		playerY = GameScreen.p.getY();
 		facePlayer(playerX, playerY);
 		if(currentOrientation == 0) {
-			if(playerX - getX() <= getWidth() && Math.abs(playerY - getY()) <= 25) {
+			if(playerX - getX() < getHeight() && Math.abs(playerY - getY()) < getWidth()) {
 				setVx(0);
 				setVy(0);
-				GameScreen.p.move(playerX, playerY - 50, 30);
+				//GameScreen.p.move(playerX, playerY - 50, 30);
 			}else {
 				setVx(0);
 				setVy(-2);
 			}
 		}else if(currentOrientation == 1) {
-			if(playerX - getX() <= getHeight() && Math.abs(playerY - getY()) <= getWidth()) {
+			if(playerX - getX() < getHeight() && Math.abs(playerY - getY()) < getWidth()) {
 				setVx(0);
 				setVy(0);
-				GameScreen.p.move(playerX + 50, playerY, 30);
+				//GameScreen.p.move(playerX + 50, playerY, 30);
 			}else {
 				setVx(2);
 				setVy(0);
 			}
 		}else if(currentOrientation == 2) {
-			if(playerX - getX() <= getWidth() && Math.abs(playerY - getY()) <= 25) {
+			if(playerX - getX() < getWidth() && Math.abs(playerY - getY()) < getHeight()) {
 				setVx(0);
 				setVy(0);
-				GameScreen.p.move(playerX, playerY + 50, 30);
+				//GameScreen.p.move(playerX, playerY + 50, 30);
 			}else{
 				setVy(2);
 				setVx(0);	
 			}
 		}else if(currentOrientation == 3) {
-			if(playerX - getX() <= getHeight() && Math.abs(playerY - getY()) <= getWidth()) {
+			
+			if(Math.abs(playerX - getX()) < getWidth() && Math.abs(playerY - getY()) < getHeight())  {
 				setVx(0);
 				setVy(0);
-				GameScreen.p.move(playerX - 50, playerY, 30);
+				//GameScreen.p.move(playerX - 50, playerY, 30);
 			}else{
 				setVx(-2);
 				setVy(0);
 			}
 		}
-		//setVx(1);
-		//setVy(1);
-
 		
+			//setVx(-2);
+			//setVy(0);
+		//}
 	}
 	public boolean checkGreater(int a , int b) {
 		if(Math.abs(a) > Math.abs(b))
