@@ -78,6 +78,7 @@ public class Player extends Component implements KeyedComponent{
 	@Override
 	public void keyPressed(KeyEvent e) { 
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
+			if()
 			currentOrientation = 0;
 			this.move(getX(), getY()-movement, 40);
 		}

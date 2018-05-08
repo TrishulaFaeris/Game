@@ -109,6 +109,10 @@ public class NPC extends MovingComponent{
 			if(playerX - getX() < getHeight() && Math.abs(playerY - getY()) < getWidth()) {
 				setVx(0);
 				setVy(0);
+				if(GameScreen.p.checkBoundY(playerY - 50) == false) {
+					int currentY = playerY;
+					GameScreen.p.move(playerX, 0, GameScreen.p.calculationTimeToMove(currentY));
+				}
 				GameScreen.p.move(playerX, playerY - 50, 30);
 			}else {
 				setVx(0);
