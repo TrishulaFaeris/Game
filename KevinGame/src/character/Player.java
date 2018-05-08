@@ -183,16 +183,16 @@ public class Player extends Component implements KeyedComponent{
     	notlocked = true;
 	}
 	//the check bound method checks if it in bounds, if it is false, move it the bounded region in this case is 960
-	public int checkBoundX(int x) {
-		if(x > 960) 
-			return 960;
-		return 0;
+	public boolean checkBoundX(int x) {
+		if(x > 960 || x < 0) 
+			return false;
+		return true;
 	}
 	//same as the top but 560 is the bounded region
-	public int checkBoundY(int y) {
-		if(y > 560)
-			return 560;
-		return 0;
+	public boolean checkBoundY(int y) {
+		if(y > 560 || y < 0)
+			return false;
+		return true;
 	}
 	//this will always move in relationship to 50pix/30miliseconds
 	//useful when getting hit and is close to the edge of the screen
