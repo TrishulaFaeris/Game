@@ -182,21 +182,22 @@ public class Player extends Component implements KeyedComponent{
 	public void keyReleased(KeyEvent e) {    
     	notlocked = true;
 	}
-	public void moveAfterCheck(int x, int y) {
-			if(!checkBoundX(x)) {
-				//move
-			}
-			if(!checkBoundY(y)) {
-				//move
-			}
-	}
 	//the check bound method checks if it in bounds, if it is false, move it the bounded region in this case is 960
-	public boolean checkBoundX(int x) {
-		return true;
+	public int checkBoundX(int x) {
+		if(x > 960) 
+			return 960;
+		return 0;
 	}
 	//same as the top but 560 is the bounded region
-	public boolean checkBoundY(int y) {
-		return true;
+	public int checkBoundY(int y) {
+		if(y > 560)
+			return 560;
+		return 0;
+	}
+	//this will always move in relationship to 50pix/30miliseconds
+	//useful when getting hit and is close to the edge of the screen
+	public int calculationTimeToMove(int x) {
+		return ((30*x)/50);
 	}
 	public boolean checkHit() {
 		return true;
