@@ -20,6 +20,7 @@ import gui.components.ImageButton;
 import gui.components.ImageTextButton;
 import gui.interfaces.KeyedComponent;
 import utility.Utility;
+import mainGame.GameGui;
 
 public class Player extends Component implements KeyedComponent{
 
@@ -74,25 +75,60 @@ public class Player extends Component implements KeyedComponent{
 		notlocked = true;
 
 	}
-
+	//need to add a condition so that the player doesn't move when hit
 	@Override
 	public void keyPressed(KeyEvent e) { 
-		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			if()
-			currentOrientation = 0;
-			this.move(getX(), getY()-movement, 40);
+		if(e.getKeyCode() == KeyEvent.VK_UP) {
+			if(currentOrientation % 2 == 0){
+				if(checkBoundY(getY() - getHeight())) {
+					currentOrientation = 0;
+					this.move(getX(), getY()-movement, 40);
+				}
+			}else {
+				if(checkBoundY(getY() - getWidth())) {
+					currentOrientation = 0;
+					this.move(getX(), getY()-movement, 40);
+				}
+			}
 		}
 	    else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			currentOrientation = 1;
-			this.move(getX()+movement, getY(), 40);
+			if(currentOrientation % 2 == 0){
+				if(checkBoundX(getX() + getWidth())) {
+			    	currentOrientation = 1;
+					this.move(getX()+movement, getY(), 40);
+				}
+			}else {
+				if(checkBoundX(getX() + getHeight())) {
+			    	currentOrientation = 1;
+					this.move(getX()+movement, getY(), 40);
+				}
+			}
 	    }
 	    else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			currentOrientation = 2;
-			this.move(getX(), getY()+movement, 40);
+			if(currentOrientation % 2 == 0){
+				if(checkBoundY(getY() + getHeight())) {					
+					currentOrientation = 2;
+					this.move(getX(), getY()+movement, 40);
+				}
+			}else {
+				if(checkBoundY(getY() + getWidth())) {
+					currentOrientation = 2;
+					this.move(getX(), getY()+movement, 40);
+				}
+			}
 		}
 	    else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			currentOrientation = 3;
-			this.move(getX()-movement, getY(), 40);
+			if(currentOrientation % 2 == 0){
+				if(checkBoundX(getX() - getWidth())) {
+			    	currentOrientation = 3;
+					this.move(getX()-movement, getY(), 40);
+				}
+			}else {
+				if(checkBoundX(getX() - getHeight())) {
+			    	currentOrientation = 3;
+					this.move(getX()-movement, getY(), 40);
+				}
+			}
 	    }else if(e.getKeyCode() == KeyEvent.VK_SPACE) {
 	    	if(notlocked == true) {
 		    	clipIndex = clipIndex % bullets.length;
@@ -183,15 +219,15 @@ public class Player extends Component implements KeyedComponent{
 	public void keyReleased(KeyEvent e) {    
     	notlocked = true;
 	}
-	//the check bound method checks if it in bounds, if it is false, move it the bounded region in this case is 960
+	//the check bound method checks if it in bounds, if it is false, it is not in bound, move it the bounded region in this case is 960
 	public boolean checkBoundX(int x) {
-		if(x > 960 || x < 0) 
+		if(x > 920 || x < 0) 
 			return false;
 		return true;
 	}
 	//same as the top but 560 is the bounded region
 	public boolean checkBoundY(int y) {
-		if(y > 560 || y < 0)
+		if(y > 500 || y < 0)
 			return false;
 		return true;
 	}
