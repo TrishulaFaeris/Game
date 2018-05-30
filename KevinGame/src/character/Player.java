@@ -18,11 +18,12 @@ import gui.components.Component;
 import gui.components.Graphic;
 import gui.components.ImageButton;
 import gui.components.ImageTextButton;
+import gui.components.MovingComponent;
 import gui.interfaces.KeyedComponent;
 import utility.Utility;
 import mainGame.GameGui;
 
-public class Player extends Component implements KeyedComponent{
+public class Player extends MovingComponent implements KeyedComponent{
 
 	//how fast you move
 	private int movement;
@@ -34,6 +35,9 @@ public class Player extends Component implements KeyedComponent{
 	private int bulletDistance;
 	private int width;
 	private int height;
+	private double speed = 3;
+	
+	
 	
 	//player related stuff;
 	private BufferedImage[] orientations;
@@ -73,62 +77,67 @@ public class Player extends Component implements KeyedComponent{
 		clipIndex = 0;
 		bulletDistance = 300;
 		notlocked = true;
-
+		Thread t = new Thread(this);
+		t.start();
 	}
 	//need to add a condition so that the player doesn't move when hit
 	@Override
 	public void keyPressed(KeyEvent e) { 
 		if(e.getKeyCode() == KeyEvent.VK_UP) {
-			if(currentOrientation % 2 == 0){
-				if(checkBoundY(getY() - getHeight())) {
+//			if(currentOrientation % 2 == 0){
+//				if(checkBoundY(getY() - getHeight())) {
+//					currentOrientation = 0;
+//					this.move(getX(), getY()-movement, 40);
+//				}
+//			}else {
+//				if(checkBoundY(getY() - getWidth())) {
 					currentOrientation = 0;
-					this.move(getX(), getY()-movement, 40);
-				}
-			}else {
-				if(checkBoundY(getY() - getWidth())) {
-					currentOrientation = 0;
-					this.move(getX(), getY()-movement, 40);
-				}
-			}
+//					this.move(getX(), getY()-movement, 40);
+//				}
+//			}
+			setVy(-speed);
 		}
 	    else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			if(currentOrientation % 2 == 0){
-				if(checkBoundX(getX() + getWidth())) {
+//			if(currentOrientation % 2 == 0){
+//				if(checkBoundX(getX() + getWidth())) {
 			    	currentOrientation = 1;
-					this.move(getX()+movement, getY(), 40);
-				}
-			}else {
-				if(checkBoundX(getX() + getHeight())) {
-			    	currentOrientation = 1;
-					this.move(getX()+movement, getY(), 40);
-				}
-			}
+//					this.move(getX()+movement, getY(), 40);
+//				}
+//			}else {
+//				if(checkBoundX(getX() + getHeight())) {
+//			    	currentOrientation = 1;
+//					this.move(getX()+movement, getY(), 40);
+//				}
+//			}
+	    	setVx(speed);
 	    }
 	    else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			if(currentOrientation % 2 == 0){
-				if(checkBoundY(getY() + getHeight())) {					
+//			if(currentOrientation % 2 == 0){
+//				if(checkBoundY(getY() + getHeight())) {					
+//					currentOrientation = 2;
+//					this.move(getX(), getY()+movement, 40);
+//				}
+//			}else {
+//				if(checkBoundY(getY() + getWidth())) {
 					currentOrientation = 2;
-					this.move(getX(), getY()+movement, 40);
-				}
-			}else {
-				if(checkBoundY(getY() + getWidth())) {
-					currentOrientation = 2;
-					this.move(getX(), getY()+movement, 40);
-				}
-			}
+//					this.move(getX(), getY()+movement, 40);
+//				}
+//			}
+	    	setVy(speed);
 		}
 	    else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			if(currentOrientation % 2 == 0){
-				if(checkBoundX(getX() - getWidth())) {
+//			if(currentOrientation % 2 == 0){
+//				if(checkBoundX(getX() - getWidth())) {
+//			    	currentOrientation = 3;
+//					this.move(getX()-movement, getY(), 40);
+//				}
+//			}else {
+//				if(checkBoundX(getX() - getHeight())) {
 			    	currentOrientation = 3;
-					this.move(getX()-movement, getY(), 40);
-				}
-			}else {
-				if(checkBoundX(getX() - getHeight())) {
-			    	currentOrientation = 3;
-					this.move(getX()-movement, getY(), 40);
-				}
-			}
+//					this.move(getX()-movement, getY(), 40);
+//				}
+//			}
+	    	setVx(-speed);
 	    }else if(e.getKeyCode() == KeyEvent.VK_SPACE) {
 	    	if(notlocked == true) {
 		    	clipIndex = clipIndex % bullets.length;
@@ -218,6 +227,62 @@ public class Player extends Component implements KeyedComponent{
 	@Override
 	public void keyReleased(KeyEvent e) {    
     	notlocked = true;
+		if(e.getKeyCode() == KeyEvent.VK_UP) {
+//			if(currentOrientation % 2 == 0){
+//				if(checkBoundY(getY() - getHeight())) {
+//					currentOrientation = 0;
+//					this.move(getX(), getY()-movement, 40);
+//				}
+//			}else {
+//				if(checkBoundY(getY() - getWidth())) {
+//					currentOrientation = 0;
+//					this.move(getX(), getY()-movement, 40);
+//				}
+//			}
+			setVy(0);
+		}
+	    else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+//			if(currentOrientation % 2 == 0){
+//				if(checkBoundX(getX() + getWidth())) {
+//			    	currentOrientation = 1;
+//					this.move(getX()+movement, getY(), 40);
+//				}
+//			}else {
+//				if(checkBoundX(getX() + getHeight())) {
+//			    	currentOrientation = 1;
+//					this.move(getX()+movement, getY(), 40);
+//				}
+//			}
+	    	setVx(0);
+	    }
+	    else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+//			if(currentOrientation % 2 == 0){
+//				if(checkBoundY(getY() + getHeight())) {					
+//					currentOrientation = 2;
+//					this.move(getX(), getY()+movement, 40);
+//				}
+//			}else {
+//				if(checkBoundY(getY() + getWidth())) {
+//					currentOrientation = 2;
+//					this.move(getX(), getY()+movement, 40);
+//				}
+//			}
+	    	setVy(0);
+		}
+	    else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+//			if(currentOrientation % 2 == 0){
+//				if(checkBoundX(getX() - getWidth())) {
+//			    	currentOrientation = 3;
+//					this.move(getX()-movement, getY(), 40);
+//				}
+//			}else {
+//				if(checkBoundX(getX() - getHeight())) {
+//			    	currentOrientation = 3;
+//					this.move(getX()-movement, getY(), 40);
+//				}
+//			}
+	    	setVx(0);
+	    }
 	}
 	//the check bound method checks if it in bounds, if it is false, it is not in bound, move it the bounded region in this case is 960
 	public boolean checkBoundX(int x) {
@@ -260,12 +325,17 @@ public class Player extends Component implements KeyedComponent{
 		// TODO Auto-generated method stub
 		
 	}
-
-
-
 	@Override
-	public void update(Graphics2D g) {
-
+	public void drawImage(Graphics2D g) {
+//		g.drawImage( orientations[currentOrientation], 0, 0, null);
+	}
+	@Override
+	public void checkBehaviors() {
+		// TODO Auto-generated method stub
+		if(getX() > 920) {
+			setX(919);
+			setVx(0);
+		}
 	}
 
 

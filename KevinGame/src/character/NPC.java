@@ -116,6 +116,14 @@ public class NPC extends MovingComponent{
 		playerX = GameScreen.p.getX();
 		playerY = GameScreen.p.getY();
 		facePlayer(playerX, playerY);
+		//use this when perfectly diagonal
+		double dx = playerX - getX();
+		double dy = playerY - getY();
+		double distance = Math.sqrt(Math.pow(dx, 2)+ Math.pow(dy, 2));
+		setVx(dx/distance * 2);
+		setVy(dy/distance * 2);
+		
+		/**old way:
 		if(currentOrientation == 0) {
 			if(playerX - getX() < getHeight() && Math.abs(playerY - getY()) < getWidth()) {
 				setVx(0);
@@ -130,7 +138,7 @@ public class NPC extends MovingComponent{
 				setVx(0);
 				setVy(0);
 				
-				//GameScreen.p.move(playerX + 50, playerY, 30);
+				GameScreen.p.setVx(GameScreen.p.getVx()+2);
 			}else {
 				setVx(2);
 				setVy(0);
@@ -159,6 +167,8 @@ public class NPC extends MovingComponent{
 			//setVx(-2);
 			//setVy(0);
 		//}
+		 * */
+		 
 	}
 	public boolean checkGreater(int a , int b) {
 		if(Math.abs(a) > Math.abs(b))
