@@ -48,6 +48,7 @@ public class Player extends MovingComponent implements KeyedComponent{
 		
 		/*the pic should look like this
 		 * from the edge of the body to the edge of the gun is 3 pixel
+		 * 
 		 * the width of gun is 7
 		 * and the height is 13
 		 * body is 25 by 25
@@ -70,7 +71,7 @@ public class Player extends MovingComponent implements KeyedComponent{
 		this.height = height;
 		
 		//bullet stuff
-		bullets = new Bullet[50];
+		bullets = new Bullet[100];
 		for(int i = 0; i < bullets.length; i++) {
 			bullets[i] = new Bullet(-50, -50);
 		}
@@ -152,8 +153,11 @@ public class Player extends MovingComponent implements KeyedComponent{
 	private void shootBullet() {
 		//need to fix, I suggest that pics to be remade, and the bullets to be shotten off the gun,
 		//re: needs to be 3pixel off, so need more if else
+		//NEW DISCOVERY! THE GETX() AND GETY() GETS THE MIDDLE COORDINATE OF THE COMPONENT, NOT THE TOP RIGHT CORNER. THIS CHANGES SO MUCH!
+		int getBx = -100;
+		int getBy = -100;
     	if(currentOrientation == 0) {
-    		bullets[clipIndex].setX((getX() + width - bullets[clipIndex].getWidth() - 1));
+    		bullets[clipIndex].setX(getX() + width - bullets[clipIndex].getWidth() - 1);
         	bullets[clipIndex].setY(getY());
 	    	Utility.moveThen(bullets[clipIndex], (getX() + width - bullets[clipIndex].getWidth() - 1), getY()-bulletDistance, 500, new Action() {
 				
@@ -169,9 +173,11 @@ public class Player extends MovingComponent implements KeyedComponent{
 			});
     	}
     	else if(currentOrientation  == 1) {
-    		bullets[clipIndex].setX(getX() + width - bullets[clipIndex].getWidth());
-        	bullets[clipIndex].setY(getY() + height - bullets[clipIndex].getHeight() - 1);
-    		Utility.moveThen(bullets[clipIndex], getX() + bulletDistance, getY() + height - bullets[clipIndex].getHeight() - 1, 500, new Action() {
+    		getBx = getX() + getHeight() + bullets[clipIndex].getWidth();
+    		getBy = getY() - 3 + getWidth() - bullets[clipIndex].getHeight();
+    		bullets[clipIndex].setX(getBx);
+        	bullets[clipIndex].setY(getBy);
+    		Utility.moveThen(bullets[clipIndex], getBx + bulletDistance, getBy, 500, new Action() {
 				
 	    		
 	    		int i = clipIndex;
@@ -201,9 +207,9 @@ public class Player extends MovingComponent implements KeyedComponent{
     		
     	}else if(currentOrientation == 3) {
     		bullets[clipIndex].setX(getX() + 1 + bullets[clipIndex].getWidth());
-    		bullets[clipIndex].setY(getY() + bullets[clipIndex].getWidth());
+    		bullets[clipIndex].setY(getY() + 2);
    	
-	    	Utility.moveThen(bullets[clipIndex], getX() - bulletDistance, getY(), 500, new Action() {
+	    	Utility.moveThen(bullets[clipIndex], getX() - bulletDistance, getY() + 2, 500, new Action() {
 	    		int i = clipIndex;
 				@Override
 				public void act() {

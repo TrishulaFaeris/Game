@@ -76,7 +76,6 @@ public class NPC extends MovingComponent{
 			}else {
 				currentOrientation = pCurrentOrientation;
 			}
-			System.out.println(checkEqual(xpos - getX() , ypos - getY()));
 		}else if(xpos - getX() <= 0 && ypos - getY() >= 0) {
 			if(!checkEqual(xpos - getX() , ypos - getY())) {
 				if(checkGreater(xpos - getX(), ypos - getY())) {
@@ -117,11 +116,11 @@ public class NPC extends MovingComponent{
 		playerY = GameScreen.p.getY();
 		facePlayer(playerX, playerY);
 		//use this when perfectly diagonal
-		double dx = playerX - getX();
-		double dy = playerY - getY();
-		double distance = Math.sqrt(Math.pow(dx, 2)+ Math.pow(dy, 2));
-		setVx(dx/distance * 2);
-		setVy(dy/distance * 2);
+//		double dx = playerX - getX();
+//		double dy = playerY - getY();
+//		double distance = Math.sqrt(Math.pow(dx, 2)+ Math.pow(dy, 2));
+//		setVx(dx/distance * 2);
+//		setVy(dy/distance * 2);
 		
 		/**old way:
 		if(currentOrientation == 0) {
