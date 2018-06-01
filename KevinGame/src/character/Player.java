@@ -33,8 +33,6 @@ public class Player extends MovingComponent implements KeyedComponent{
 	private int clipIndex;
 	private boolean notlocked;
 	private int bulletDistance;
-	private int width;
-	private int height;
 	private double speed = 3;
 	
 	
@@ -66,9 +64,6 @@ public class Player extends MovingComponent implements KeyedComponent{
 		orientations[3] = new Graphic(0, 0, "resources/PWest.png").getImage();
 		movement = 10;
 		
-		//player stuff
-		this.width = width;
-		this.height = height;
 		
 		//bullet stuff
 		bullets = new Bullet[5];
@@ -85,60 +80,24 @@ public class Player extends MovingComponent implements KeyedComponent{
 	@Override
 	public void keyPressed(KeyEvent e) { 
 		if(e.getKeyCode() == KeyEvent.VK_UP) {
-//			if(currentOrientation % 2 == 0){
-//				if(checkBoundY(getY() - getHeight())) {
-//					currentOrientation = 0;
-//					this.move(getX(), getY()-movement, 40);
-//				}
-//			}else {
-//				if(checkBoundY(getY() - getWidth())) {
 					currentOrientation = 0;
-//					this.move(getX(), getY()-movement, 40);
-//				}
-//			}
-			setVy(-speed);
+					setVx(0);
+					setVy(-speed);
 		}
 	    else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-//			if(currentOrientation % 2 == 0){
-//				if(checkBoundX(getX() + getWidth())) {
 			    	currentOrientation = 1;
-//					this.move(getX()+movement, getY(), 40);
-//				}
-//			}else {
-//				if(checkBoundX(getX() + getHeight())) {
-//			    	currentOrientation = 1;
-//					this.move(getX()+movement, getY(), 40);
-//				}
-//			}
-	    	setVx(speed);
+			    	setVy(0);
+			    	setVx(speed);
 	    }
 	    else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-//			if(currentOrientation % 2 == 0){
-//				if(checkBoundY(getY() + getHeight())) {					
-//					currentOrientation = 2;
-//					this.move(getX(), getY()+movement, 40);
-//				}
-//			}else {
-//				if(checkBoundY(getY() + getWidth())) {
 					currentOrientation = 2;
-//					this.move(getX(), getY()+movement, 40);
-//				}
-//			}
-	    	setVy(speed);
+					setVx(0);
+					setVy(speed);
 		}
 	    else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-//			if(currentOrientation % 2 == 0){
-//				if(checkBoundX(getX() - getWidth())) {
-//			    	currentOrientation = 3;
-//					this.move(getX()-movement, getY(), 40);
-//				}
-//			}else {
-//				if(checkBoundX(getX() - getHeight())) {
 			    	currentOrientation = 3;
-//					this.move(getX()-movement, getY(), 40);
-//				}
-//			}
-	    	setVx(-speed);
+			    	setVx(-speed);
+					setVy(0);
 	    }else if(e.getKeyCode() == KeyEvent.VK_SPACE) {
 	    	if(notlocked == true) {
 		    	clipIndex = clipIndex % bullets.length;
@@ -216,7 +175,7 @@ public class Player extends MovingComponent implements KeyedComponent{
     		bullets[clipIndex].setX(getBx);
     		bullets[clipIndex].setY(getBy);
    	
-	    	Utility.moveThen(bullets[clipIndex], getBy - bulletDistance, getY() + 2, 500, new Action() {
+	    	Utility.moveThen(bullets[clipIndex], getBx - bulletDistance, getBy, 500, new Action() {
 	    		int i = clipIndex;
 				@Override
 				public void act() {
@@ -241,78 +200,17 @@ public class Player extends MovingComponent implements KeyedComponent{
 	public void keyReleased(KeyEvent e) {    
     	notlocked = true;
 		if(e.getKeyCode() == KeyEvent.VK_UP) {
-//			if(currentOrientation % 2 == 0){
-//				if(checkBoundY(getY() - getHeight())) {
-//					currentOrientation = 0;
-//					this.move(getX(), getY()-movement, 40);
-//				}
-//			}else {
-//				if(checkBoundY(getY() - getWidth())) {
-//					currentOrientation = 0;
-//					this.move(getX(), getY()-movement, 40);
-//				}
-//			}
 			setVy(0);
 		}
 	    else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-//			if(currentOrientation % 2 == 0){
-//				if(checkBoundX(getX() + getWidth())) {
-//			    	currentOrientation = 1;
-//					this.move(getX()+movement, getY(), 40);
-//				}
-//			}else {
-//				if(checkBoundX(getX() + getHeight())) {
-//			    	currentOrientation = 1;
-//					this.move(getX()+movement, getY(), 40);
-//				}
-//			}
 	    	setVx(0);
 	    }
 	    else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-//			if(currentOrientation % 2 == 0){
-//				if(checkBoundY(getY() + getHeight())) {					
-//					currentOrientation = 2;
-//					this.move(getX(), getY()+movement, 40);
-//				}
-//			}else {
-//				if(checkBoundY(getY() + getWidth())) {
-//					currentOrientation = 2;
-//					this.move(getX(), getY()+movement, 40);
-//				}
-//			}
 	    	setVy(0);
 		}
 	    else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-//			if(currentOrientation % 2 == 0){
-//				if(checkBoundX(getX() - getWidth())) {
-//			    	currentOrientation = 3;
-//					this.move(getX()-movement, getY(), 40);
-//				}
-//			}else {
-//				if(checkBoundX(getX() - getHeight())) {
-//			    	currentOrientation = 3;
-//					this.move(getX()-movement, getY(), 40);
-//				}
-//			}
 	    	setVx(0);
 	    }
-	}
-	//the check bound method checks if it in bounds, if it is false, it is not in bound, move it the bounded region in this case is 960
-	public boolean checkBoundX(int x) {
-		if(x > 920 || x < 0) 
-			return false;
-		return true;
-	}
-	//same as the top but 560 is the bounded region
-	public boolean checkBoundY(int y) {
-		if(y > 500 || y < 0)
-			return false;
-		return true;
-	}
-	//this will always move in relationship to 50pix/30miliseconds
-	//useful when getting hit and is close to the edge of the screen
-	public int calculationTimeToMove(int x) {
-		return ((30*x)/50);
 	}
 	public boolean checkHit() {
 		return true;
