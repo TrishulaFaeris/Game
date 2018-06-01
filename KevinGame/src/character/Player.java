@@ -71,7 +71,7 @@ public class Player extends MovingComponent implements KeyedComponent{
 		this.height = height;
 		
 		//bullet stuff
-		bullets = new Bullet[100];
+		bullets = new Bullet[5];
 		for(int i = 0; i < bullets.length; i++) {
 			bullets[i] = new Bullet(-50, -50);
 		}
@@ -157,9 +157,11 @@ public class Player extends MovingComponent implements KeyedComponent{
 		int getBx = -100;
 		int getBy = -100;
     	if(currentOrientation == 0) {
-    		bullets[clipIndex].setX(getX() + width - bullets[clipIndex].getWidth() - 1);
-        	bullets[clipIndex].setY(getY());
-	    	Utility.moveThen(bullets[clipIndex], (getX() + width - bullets[clipIndex].getWidth() - 1), getY()-bulletDistance, 500, new Action() {
+    		getBx = getX() +  getWidth()/2 ;
+    		getBy = getY() - getHeight()/2;
+    		bullets[clipIndex].setX(getBx);
+        	bullets[clipIndex].setY(getBy);
+	    	Utility.moveThen(bullets[clipIndex], getBx, getBy-bulletDistance, 500, new Action() {
 				
 	    		
 	    		int i = clipIndex;
@@ -171,10 +173,11 @@ public class Player extends MovingComponent implements KeyedComponent{
 					
 				}
 			});
+        	
     	}
     	else if(currentOrientation  == 1) {
-    		getBx = getX() + getHeight() + bullets[clipIndex].getWidth();
-    		getBy = getY() - 3 + getWidth() - bullets[clipIndex].getHeight();
+    		getBx = getX() + getHeight();
+    		getBy = getY() + getWidth() - bullets[clipIndex].getWidth();
     		bullets[clipIndex].setX(getBx);
         	bullets[clipIndex].setY(getBy);
     		Utility.moveThen(bullets[clipIndex], getBx + bulletDistance, getBy, 500, new Action() {
@@ -190,9 +193,11 @@ public class Player extends MovingComponent implements KeyedComponent{
 				}
 			});
     	}else if(currentOrientation == 2) {
-    		bullets[clipIndex].setX(getX() + 1);
-        	bullets[clipIndex].setY(getY() + height + bullets[clipIndex].getHeight());
-    		Utility.moveThen(bullets[clipIndex], getX(), getY() + height + bullets[clipIndex].getHeight()+ bulletDistance, 500, new Action() {
+    		getBx = getX() +  getWidth()/2 - bullets[clipIndex].getHeight();
+    		getBy = getY() + getHeight();
+    		bullets[clipIndex].setX(getBx);
+        	bullets[clipIndex].setY(getBy);
+    		Utility.moveThen(bullets[clipIndex], getBx, getBy + bulletDistance, 500, new Action() {
 				
 	    		
 	    		int i = clipIndex;
@@ -206,10 +211,12 @@ public class Player extends MovingComponent implements KeyedComponent{
 			});
     		
     	}else if(currentOrientation == 3) {
-    		bullets[clipIndex].setX(getX() + 1 + bullets[clipIndex].getWidth());
-    		bullets[clipIndex].setY(getY() + 2);
+    		getBx = getX() - getHeight()/2; 
+    		getBy = getY() - getWidth()/2 + bullets[clipIndex].getHeight() + 3;
+    		bullets[clipIndex].setX(getBx);
+    		bullets[clipIndex].setY(getBy);
    	
-	    	Utility.moveThen(bullets[clipIndex], getX() - bulletDistance, getY() + 2, 500, new Action() {
+	    	Utility.moveThen(bullets[clipIndex], getBy - bulletDistance, getY() + 2, 500, new Action() {
 	    		int i = clipIndex;
 				@Override
 				public void act() {
