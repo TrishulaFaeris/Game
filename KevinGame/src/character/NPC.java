@@ -54,51 +54,31 @@ public class NPC extends MovingComponent{
 		*top is 0, right is 1, bot is 2, left is 3;
 		*/
 		if(xpos - getX() >= 0 && ypos - getY() <= 0) {
-			if(!checkEqual(xpos - getX() , ypos - getY())) {
-				if(checkGreater(xpos - getX(), ypos - getY())) {
-					currentOrientation = 1;					
-				}else {
-					currentOrientation = 0;
-				}
-
+			if(checkGreater(xpos - getX(), ypos - getY())){
+				currentOrientation = 1;
 			}else {
-				currentOrientation = pCurrentOrientation;
-			}
-
-		}else if(xpos - getX() >= 0 && ypos - getY() >= 0) {
-			if(!checkEqual(xpos - getX() , ypos - getY())) {
-				if(checkGreater(xpos - getX(), ypos - getY())) {
-					currentOrientation = 1;					
-				}else {
-					currentOrientation = 2;
-				}
-
-			}else {
-				currentOrientation = pCurrentOrientation;
-			}
-		}else if(xpos - getX() <= 0 && ypos - getY() >= 0) {
-			if(!checkEqual(xpos - getX() , ypos - getY())) {
-				if(checkGreater(xpos - getX(), ypos - getY())) {
-					currentOrientation = 3;					
-				}else {
-					currentOrientation = 2;
-				}
-
-			}else {
-				currentOrientation = pCurrentOrientation;
-			}
-		}else if(xpos - getX() <= 0 && ypos - getY() <= 0){
-			if(!checkEqual(xpos - getX() , ypos - getY())) {
-				if(checkGreater(xpos - getX(), ypos - getY())) {
-					currentOrientation = 0;					
-				}else {
-					currentOrientation = 3;
-				}
-
-			}else {
-				currentOrientation = pCurrentOrientation;
+				currentOrientation = 0;
 			}
 			
+			
+		}else if(xpos - getX() >= 0 && ypos - getY() >= 0) {
+			if(checkGreater(xpos - getX(), ypos - getY())){
+				currentOrientation = 1;
+			}else {
+				currentOrientation = 2;
+			}
+		}else if(xpos - getX() <= 0 && ypos - getY() >= 0) {
+			if(checkGreater(xpos - getX(), ypos - getY())){
+				currentOrientation = 3;
+			}else {
+				currentOrientation = 2;
+			}
+		}else if(xpos - getX() <= 0 && ypos - getY() <= 0){
+			if(checkGreater(xpos - getX(), ypos - getY())){
+				currentOrientation = 3;
+			}else {
+				currentOrientation = 0;
+			}
 		}
 	}
 	@Override
