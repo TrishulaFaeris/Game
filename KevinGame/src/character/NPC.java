@@ -22,6 +22,7 @@ public class NPC extends MovingComponent{
 	private int playerX;
 	private int playerY;
 	private int pCurrentOrientation;
+	private boolean firstCheck;
 	public NPC(int x, int y, int w, int h) {
 		super(x, y, w, h);
 		//make the images transparent
@@ -44,6 +45,9 @@ public class NPC extends MovingComponent{
 
 		movement = 10;
 		pCurrentOrientation = GameScreen.p.getCurrentOrientation();
+		firstCheck = false;
+		playerX = GameScreen.p.getX();
+		playerY = GameScreen.p.getY();
 	}
 
 	public BufferedImage getImage(){
@@ -94,7 +98,13 @@ public class NPC extends MovingComponent{
 		//need to add if statements to base on the current player location as well
 		playerX = GameScreen.p.getX();
 		playerY = GameScreen.p.getY();
-		facePlayer(playerX, playerY);
+		firstTime();
+		if(checkEqual(getX() - playerX, 0) || checkEqual(getY() - playerY, 0)) {
+			facePlayer(playerX, playerY);
+		}
+		if(checkEqual(playerX, getX()) || checkEqual(playerY, getY())) {
+			facePlayer(playerX, playerY);
+		}
 		//use this when perfectly diagonal
 //		double dx = playerX - getX();
 //		double dy = playerY - getY();
@@ -102,7 +112,6 @@ public class NPC extends MovingComponent{
 //		setVx(dx/distance * 2);
 //		setVy(dy/distance * 2);
 		
-		/**old way:
 		if(currentOrientation == 0) {
 			if(playerX - getX() < getHeight() && Math.abs(playerY - getY()) < getWidth()) {
 				setVx(0);
@@ -117,7 +126,7 @@ public class NPC extends MovingComponent{
 				setVx(0);
 				setVy(0);
 				
-				GameScreen.p.setVx(GameScreen.p.getVx()+2);
+				//GameScreen.p.setVx(GameScreen.p.getVx()+2);
 			}else {
 				setVx(2);
 				setVy(0);
@@ -146,9 +155,16 @@ public class NPC extends MovingComponent{
 			//setVx(-2);
 			//setVy(0);
 		//}
-		 * */
 		 
 	}
+
+	private void firstTime() {
+		if(!firstCheck) {
+			facePlayer(playerX, playerY);
+		}
+		firstCheck = true;
+	}
+
 	public boolean checkGreater(int a , int b) {
 		if(Math.abs(a) > Math.abs(b))
 			return true;
