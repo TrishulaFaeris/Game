@@ -22,6 +22,7 @@ import gui.components.MovingComponent;
 import gui.interfaces.KeyedComponent;
 import utility.Utility;
 import mainGame.GameGui;
+import mainGame.GameScreen;
 
 public class Player extends MovingComponent implements KeyedComponent{
 
@@ -37,6 +38,8 @@ public class Player extends MovingComponent implements KeyedComponent{
 	private int[][] Bxy;
 	private boolean isPressed;
 	public Thread t;
+	private int npcX;
+	private int npcY;
 	
 	//player related stuff;
 	private BufferedImage[] orientations;
@@ -67,7 +70,7 @@ public class Player extends MovingComponent implements KeyedComponent{
 		
 		
 		//bullet stuff
-		bullets = new Bullet[20];
+		bullets = new Bullet[100];
 		for(int i = 0; i < bullets.length; i++) {
 			bullets[i] = new Bullet(-50, -50);
 		}
@@ -124,6 +127,7 @@ public class Player extends MovingComponent implements KeyedComponent{
 		//NEW DISCOVERY! THE GETX() AND GETY() GETS THE MIDDLE COORDINATE OF THE COMPONENT, NOT THE TOP RIGHT CORNER. THIS CHANGES SO MUCH!
 		int getBx = -100;
 		int getBy = -100;
+		
     	if(currentOrientation == 0) {
     		getBx = getX() +  getWidth()/2 ;
     		getBy = getY() - getHeight()/2;
@@ -138,11 +142,17 @@ public class Player extends MovingComponent implements KeyedComponent{
 				@Override
 				public void act() {
 					// TODO Auto-generated method stub
-					bullets[i].setX(-100);
-					bullets[i].setY(-100);   
+					 if(Math.abs(Bxy[clipIndex][0] - getX()) < getWidth()/2 && Math.abs(Bxy[clipIndex][1] - getY()) < getHeight()/2) {
+						GameScreen.c.setX((int)Math.random()*-50 + 1 );
+						GameScreen.c.setY((int)Math.random()*-50 + 1 );
+						bullets[i].setX(-100);
+						bullets[i].setY(-100);
+					 }else {
+							bullets[i].setX(-100);
+							bullets[i].setY(-100);  
 					
 				}
-			});
+			}});
         	
     	}
     	else if(currentOrientation  == 1) {
@@ -160,8 +170,15 @@ public class Player extends MovingComponent implements KeyedComponent{
 				@Override
 				public void act() {
 					// TODO Auto-generated method stub
-					bullets[i].setX(-100);
-					bullets[i].setY(-100);   
+					 if(Math.abs(Bxy[clipIndex][0] - getX()) < getWidth()/2 && Math.abs(Bxy[clipIndex][1] - getY()) < getHeight()/2) {
+						GameScreen.c.setX((int)Math.random()*-50 + 1 );
+						GameScreen.c.setY((int)Math.random()*-50 + 1 );
+						bullets[i].setX(-100);
+						bullets[i].setY(-100);
+					 }else {
+							bullets[i].setX(-100);
+							bullets[i].setY(-100);  
+					 } 
 					
 				}
 			});
@@ -265,6 +282,8 @@ public class Player extends MovingComponent implements KeyedComponent{
 	@Override
 	public void checkBehaviors() {
 		// TODO Auto-generated method stub
+		npcX = GameScreen.c.getX();
+		npcY = GameScreen.c.getY();
 		if(getX() > 900) {
 			setX(899);
 			setVx(0);
@@ -284,10 +303,6 @@ public class Player extends MovingComponent implements KeyedComponent{
 	}
 	public boolean isKPressed() {
 		return isPressed;
-	}
-	public int[] getBulletLocation(){
-		return Bxy[clipIndex];
-		
 	}
 
 

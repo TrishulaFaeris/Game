@@ -24,7 +24,6 @@ public class NPC extends MovingComponent{
 	private boolean firstCheck;
 	private boolean checkIfMove;
 	private int playerHitCount;
-	private int NPCHitCount;
 	public NPC(int x, int y, int w, int h) {
 		super(x, y, w, h);
 		//make the images transparent
@@ -49,8 +48,8 @@ public class NPC extends MovingComponent{
 		playerX = GameScreen.p.getX();
 		playerY = GameScreen.p.getY();
 		playerHitCount = 0;
-		NPCHitCount = 0;
-		
+
+
 	}
 
 	public BufferedImage getImage(){
@@ -122,6 +121,7 @@ public class NPC extends MovingComponent{
 			GameGui.t.setScreen(GameGui.t.endScreen);
 		}
 		if(currentOrientation == 0) {
+			playerHitCount++;
 			if(playerX - getX() < getHeight() && Math.abs(playerY - getY()) < getWidth()) {
 				if(playerY < 22) {
 					GameScreen.p.setVy(-1);				
@@ -137,6 +137,7 @@ public class NPC extends MovingComponent{
 				setVy(-2);
 			}
 		}else if(currentOrientation == 1) {
+			playerHitCount++;
 			if(playerX - getX() < getHeight() && Math.abs(playerY - getY()) < getWidth()) {
 				if(playerX > 898) {
 					GameScreen.p.setVx(1);				
@@ -152,6 +153,7 @@ public class NPC extends MovingComponent{
 				setVy(0);
 			}
 		}else if(currentOrientation == 2) {
+			playerHitCount++;
 			if(playerX - getX() < getWidth() && Math.abs(playerY - getY()) < getHeight()) {
 				if(playerY > 478) {
 					GameScreen.p.setVy(1);	
@@ -168,6 +170,7 @@ public class NPC extends MovingComponent{
 				
 			}
 		}else if(currentOrientation == 3) {
+			playerHitCount++;
 			if(Math.abs(playerX - getX()) < getWidth() && Math.abs(playerY - getY()) < getHeight())  {
 				if(playerX < 12) {
 					GameScreen.p.setVx(-1);			
@@ -188,7 +191,7 @@ public class NPC extends MovingComponent{
 			//setVx(-2);
 			//setVy(0);
 		//}
-		 
+
 	}
 
 	private void firstTime() {
