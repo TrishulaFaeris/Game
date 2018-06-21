@@ -9,7 +9,6 @@ import gui.components.Graphic;
 import gui.interfaces.Visible;
 import gui.userInterfaces.FullFunctionScreen;
 import mainGame.GameGui;
-import mainGame.EndScreen;
 public class StartScreen extends FullFunctionScreen {
 
 	private static final long serialVersionUID = 1L;

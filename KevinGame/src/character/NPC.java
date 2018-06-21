@@ -12,17 +12,19 @@ import gui.components.Component;
 import gui.components.Graphic;
 import gui.components.ImageTextButton;
 import gui.components.MovingComponent;
+import mainGame.GameGui;
 import mainGame.GameScreen;
 
 public class NPC extends MovingComponent{
 	
-	private int movement;
 	private int currentOrientation;
 	private BufferedImage[] orientations;
 	private int playerX;
 	private int playerY;
-	private int pCurrentOrientation;
 	private boolean firstCheck;
+	private boolean checkIfMove;
+	private int playerHitCount;
+	private int NPCHitCount;
 	public NPC(int x, int y, int w, int h) {
 		super(x, y, w, h);
 		//make the images transparent
@@ -42,12 +44,13 @@ public class NPC extends MovingComponent{
 		_3_|   |____
 	   |*/
 		
-
-		movement = 10;
-		pCurrentOrientation = GameScreen.p.getCurrentOrientation();
 		firstCheck = false;
+		checkIfMove = false;
 		playerX = GameScreen.p.getX();
 		playerY = GameScreen.p.getY();
+		playerHitCount = 0;
+		NPCHitCount = 0;
+		
 	}
 
 	public BufferedImage getImage(){
@@ -99,11 +102,15 @@ public class NPC extends MovingComponent{
 		playerX = GameScreen.p.getX();
 		playerY = GameScreen.p.getY();
 		firstTime();
-		if(checkEqual(getX() - playerX, 0) || checkEqual(getY() - playerY, 0)) {
+		if(GameScreen.p.isKPressed()) {
 			facePlayer(playerX, playerY);
-		}
-		if(checkEqual(playerX, getX()) || checkEqual(playerY, getY())) {
-			facePlayer(playerX, playerY);
+			checkIfMove = false;
+		}else {
+			checkMoving();
+			checkIfMove = true;
+			if(Math.abs(playerX - getX()) < 25 || Math.abs(playerY - getY()) < 25) {
+				facePlayer(playerX, playerY);
+			}
 		}
 		//use this when perfectly diagonal
 //		double dx = playerX - getX();
@@ -111,41 +118,67 @@ public class NPC extends MovingComponent{
 //		double distance = Math.sqrt(Math.pow(dx, 2)+ Math.pow(dy, 2));
 //		setVx(dx/distance * 2);
 //		setVy(dy/distance * 2);
-		
+		if(playerHitCount == 12) {
+			GameGui.t.setScreen(GameGui.t.endScreen);
+		}
 		if(currentOrientation == 0) {
 			if(playerX - getX() < getHeight() && Math.abs(playerY - getY()) < getWidth()) {
-				setVx(0);
-				setVy(0);
-				//GameScreen.p.move(playerX, playerY - 50, 30);
+				if(playerY < 22) {
+					GameScreen.p.setVy(-1);				
+					setVx(0);
+					setVy(0);
+				}else {
+					setVx(0);
+					setVy(0);
+					GameScreen.p.move(playerX, playerY - 50, 30);
+				}
 			}else {
 				setVx(0);
 				setVy(-2);
 			}
 		}else if(currentOrientation == 1) {
 			if(playerX - getX() < getHeight() && Math.abs(playerY - getY()) < getWidth()) {
-				setVx(0);
-				setVy(0);
-				
-				//GameScreen.p.setVx(GameScreen.p.getVx()+2);
+				if(playerX > 898) {
+					GameScreen.p.setVx(1);				
+					setVx(0);
+					setVy(0);
+				}else {
+					setVx(0);
+					setVy(0);
+					GameScreen.p.move(playerX + 50, playerY, 30);
+				}
 			}else {
 				setVx(2);
 				setVy(0);
 			}
 		}else if(currentOrientation == 2) {
 			if(playerX - getX() < getWidth() && Math.abs(playerY - getY()) < getHeight()) {
-				setVx(0);
-				setVy(0);
-				//GameScreen.p.move(playerX, playerY + 50, 30);
+				if(playerY > 478) {
+					GameScreen.p.setVy(1);	
+					setVx(0);
+					setVy(0);
+				}else {
+					setVx(0);
+					setVy(0);
+					GameScreen.p.move(playerX, playerY + 50, 30);
+				}
 			}else{
 				setVy(2);
 				setVx(0);	
+				
 			}
 		}else if(currentOrientation == 3) {
-			
 			if(Math.abs(playerX - getX()) < getWidth() && Math.abs(playerY - getY()) < getHeight())  {
-				setVx(0);
-				setVy(0);
-				//GameScreen.p.move(playerX - 50, playerY, 30);
+				if(playerX < 12) {
+					GameScreen.p.setVx(-1);			
+					setVx(0);
+					setVy(0);
+				}
+				else {
+					setVx(0);
+					setVy(0);
+					GameScreen.p.move(playerX - 50, playerY, 30);
+				}
 			}else{
 				setVx(-2);
 				setVy(0);
@@ -163,6 +196,11 @@ public class NPC extends MovingComponent{
 			facePlayer(playerX, playerY);
 		}
 		firstCheck = true;
+	}
+	private void checkMoving() {
+		if(!checkIfMove) {
+			facePlayer(playerX, playerY);
+		}
 	}
 
 	public boolean checkGreater(int a , int b) {

@@ -35,7 +35,8 @@ public class Player extends MovingComponent implements KeyedComponent{
 	private int bulletDistance;
 	private double speed = 3;
 	private int[][] Bxy;
-	
+	private boolean isPressed;
+	public Thread t;
 	
 	//player related stuff;
 	private BufferedImage[] orientations;
@@ -43,7 +44,7 @@ public class Player extends MovingComponent implements KeyedComponent{
 	
 	public Player(int x, int y, int width, int height) {
 		super(x,y,width,height);
-		
+		isPressed = false;
 		/*the pic should look like this
 		 * from the edge of the body to the edge of the gun is 3 pixel
 		 * 
@@ -75,36 +76,42 @@ public class Player extends MovingComponent implements KeyedComponent{
 		notlocked = true;
 		Bxy = new int [bullets.length][2];
 		//player stuff
-		Thread t = new Thread(this);
+		t = new Thread(this);
 		t.start();
+		
 	}
 	//need to add a condition so that the player doesn't move when hit
 	@Override
 	public void keyPressed(KeyEvent e) { 
-		if(e.getKeyCode() == KeyEvent.VK_UP) {
+		if(e.getKeyCode() == KeyEvent.VK_W) {
 					currentOrientation = 0;
 					setVy(-speed);
 					setVx(0);
+					isPressed = true;
 		}
-	    else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+	    else if (e.getKeyCode() == KeyEvent.VK_D) {
 			    	currentOrientation = 1;
 			    	setVx(speed);
 			    	setVy(0);
+					isPressed = true;
 	    }
-	    else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+	    else if (e.getKeyCode() == KeyEvent.VK_S) {
 					currentOrientation = 2;
 					setVy(speed);
 					setVx(0);
+					isPressed = true;
 		}
-	    else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+	    else if (e.getKeyCode() == KeyEvent.VK_A) {
 			    	currentOrientation = 3;
 			    	setVx(-speed);
 			    	setVy(0);
+					isPressed = true;
 	    }else if(e.getKeyCode() == KeyEvent.VK_SPACE) {
 	    	if(notlocked == true) {
 		    	clipIndex = clipIndex % bullets.length;
 		    	shootBullet();
 		    	clipIndex++;
+		    	isPressed = true;
 	    	}
 	    }
 		notlocked = false;  	
@@ -210,17 +217,21 @@ public class Player extends MovingComponent implements KeyedComponent{
 	@Override
 	public void keyReleased(KeyEvent e) {    
     	notlocked = true;
-		if(e.getKeyCode() == KeyEvent.VK_UP) {
+		if(e.getKeyCode() == KeyEvent.VK_W) {
 			setVy(0);
+			isPressed = false;
 		}
-	    else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+	    else if (e.getKeyCode() == KeyEvent.VK_D) {
 	    	setVx(0);
+			isPressed = false;
 	    }
-	    else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+	    else if (e.getKeyCode() == KeyEvent.VK_S) {
 	    	setVy(0);
+			isPressed = false;
 		}
-	    else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+	    else if (e.getKeyCode() == KeyEvent.VK_A) {
 	    	setVx(0);
+			isPressed = false;
 	    }
 	}
 	public boolean checkHit() {
@@ -271,6 +282,14 @@ public class Player extends MovingComponent implements KeyedComponent{
 			setVy(0);
 		}
 	}
+	public boolean isKPressed() {
+		return isPressed;
+	}
+	public int[] getBulletLocation(){
+		return Bxy[clipIndex];
+		
+	}
+
 
 
 	

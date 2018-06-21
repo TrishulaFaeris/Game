@@ -29,7 +29,7 @@ public class EndScreen extends FullFunctionScreen{
 			
 			@Override
 			public void act() {
-				GameGui.t.setScreen(GameGui.t.startScreen);
+				System.exit(0);
 				
 			}
 		});
