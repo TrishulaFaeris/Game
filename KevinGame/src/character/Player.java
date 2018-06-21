@@ -143,8 +143,7 @@ public class Player extends MovingComponent implements KeyedComponent{
 				public void act() {
 					// TODO Auto-generated method stub
 					 if(Math.abs(Bxy[clipIndex][0] - getX()) < getWidth()/2 && Math.abs(Bxy[clipIndex][1] - getY()) < getHeight()/2) {
-						GameScreen.c.setX((int)Math.random()*-50 + 1 );
-						GameScreen.c.setY((int)Math.random()*-50 + 1 );
+						GameScreen.c.setVisible(false);
 						bullets[i].setX(-100);
 						bullets[i].setY(-100);
 					 }else {

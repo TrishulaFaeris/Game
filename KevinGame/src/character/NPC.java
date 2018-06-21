@@ -121,8 +121,8 @@ public class NPC extends MovingComponent{
 			GameGui.t.setScreen(GameGui.t.endScreen);
 		}
 		if(currentOrientation == 0) {
-			playerHitCount++;
 			if(playerX - getX() < getHeight() && Math.abs(playerY - getY()) < getWidth()) {
+				playerHitCount++;
 				if(playerY < 22) {
 					GameScreen.p.setVy(-1);				
 					setVx(0);
@@ -137,8 +137,8 @@ public class NPC extends MovingComponent{
 				setVy(-2);
 			}
 		}else if(currentOrientation == 1) {
-			playerHitCount++;
 			if(playerX - getX() < getHeight() && Math.abs(playerY - getY()) < getWidth()) {
+				playerHitCount++;
 				if(playerX > 898) {
 					GameScreen.p.setVx(1);				
 					setVx(0);
@@ -153,8 +153,8 @@ public class NPC extends MovingComponent{
 				setVy(0);
 			}
 		}else if(currentOrientation == 2) {
-			playerHitCount++;
 			if(playerX - getX() < getWidth() && Math.abs(playerY - getY()) < getHeight()) {
+				playerHitCount++;
 				if(playerY > 478) {
 					GameScreen.p.setVy(1);	
 					setVx(0);
@@ -170,8 +170,8 @@ public class NPC extends MovingComponent{
 				
 			}
 		}else if(currentOrientation == 3) {
-			playerHitCount++;
 			if(Math.abs(playerX - getX()) < getWidth() && Math.abs(playerY - getY()) < getHeight())  {
+				playerHitCount++;
 				if(playerX < 12) {
 					GameScreen.p.setVx(-1);			
 					setVx(0);
