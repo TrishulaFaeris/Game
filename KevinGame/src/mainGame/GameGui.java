@@ -1,18 +1,21 @@
 package mainGame;
 
 import gui.GUIApplication;
+import mainGame.EndScreen;
 
 public class GameGui extends GUIApplication{
-
 	/**
 	 * 
-	 */
+	 */	
+	public static GameGui t;
 	private static final long serialVersionUID = 1L;
-	private GameScreen screen;
+	public  GameScreen screen;
+	public  StartScreen startScreen;
+	public  EndScreen endScreen;
 	
 	public static void main(String[] args) {
-		GameGui s = new GameGui(960,540);
-		Thread runner  = new Thread(s);
+		t = new GameGui(960,540);
+		Thread runner  = new Thread(t);
 		runner.start();
 	}
 	public GameGui(int width, int height) {
@@ -22,9 +25,10 @@ public class GameGui extends GUIApplication{
 
 	@Override
 	public void initScreen() {
+		startScreen = new StartScreen(getWidth(),getHeight());
 		screen = new GameScreen(getWidth(),getHeight());
-		setScreen(screen);
-		
+		endScreen = new EndScreen(getWidth(),getHeight());
+		setScreen(startScreen);
 	}
-
 }
+
